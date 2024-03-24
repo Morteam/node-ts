@@ -11,3 +11,6 @@
 ### Useful packages
 
 * Nodemon `npm i -g nodemon`
+
+
+`process` contains all data about Node JS processing
