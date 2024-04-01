@@ -10,7 +10,8 @@
 
 ### Useful packages
 
-* Nodemon `npm i -g nodemon`
+* Nodemon: `npm i -g nodemon`
+* Winstons: `npm i -g nodemon`, allows us to log something but it's very useful to host in a transport (for example server, log files, etc)
 
 
 `process` contains all data about Node JS processing

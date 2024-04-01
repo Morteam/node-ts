@@ -1,5 +1,5 @@
 // const { EMAIL_TEMPLATE } = require('./js-foundations/01-template');
-const { getAge, getUUID } = require('./adapters');
+const { buildLogger, getAge, getUUID } = require('./adapters');
 
 // require('./js-foundations/01-template'); // Import and execute the file
 // require('./js-foundations/02-destructuring')
@@ -10,6 +10,12 @@ const { getAge, getUUID } = require('./adapters');
 // const { getPokemonById } = require('./js-foundations/06-promises--callback');
 // const { getPokemonById } = require('./js-foundations/07-async-await');
 const { getPokemonById } = require('./js-foundations/08-fetch-adapter');
+
+const logger = buildLogger('index.js')
+
+logger.log('Hi from the moon v1')
+
+logger.error('Error sample')
 
 // const USER_TO_FIND = 1
 
