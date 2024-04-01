@@ -1,0 +1,1 @@
+console.log('SAMPLE JS v1')
