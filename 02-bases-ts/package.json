@@ -1,0 +1,29 @@
+{
+  "name": "02-bases",
+  "version": "0.0.1",
+  "description": "Bases Project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.ts",
+    "dev-nodemon": "nodemon",
+    "build:prod": "rimraf ./dist && tsc",
+    "start:prod": "npm run build && node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manu Castro",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "get-age": "^1.0.1",
+    "uuid": "^9.0.1",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.5",
+    "@types/uuid": "^9.0.8",
+    "nodemon": "^3.1.0",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.4"
+  }
+}
