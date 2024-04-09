@@ -47,3 +47,11 @@ Scrum necesitará el **Compromiso del equipo** en el sentido de la transparencia
 **Tamaño del equipo**, debe ser los suficientemente grande como para que el equipo por si mismo pueda resolver sus problemas, pero lo suficientemente pequeño para que todos puedan hablar y participar de forma transparente, las reuniones deben ser de max 15 minutos, es decir, debe tener max 10 personas, entonces, el Team Dev debe tener entre 5 - 8 personas. Cada miembro del equipo debe tener determinadas responsabilidades
 
 **Faciliad de comunicación**, se contempla una mentalidad de "puertas abiertas", es decir que se puedan comunicar distintos miembros de la organización independientemente de su rol siempre en el marco del respeto y la transparencia, un trato "horizontal", buscando siempre con esto el bienestar del equipo y la consecución de los objetivos
+
+**Dedicación del equipo**, se debe evitar el Multitasking, el team debe estar en un solo proyecto a la vez, esto ayuda a evitar la dispersión y aumenta la productividad
+
+**Estabilidad de los miembros del equipo**, se busca que lo miembros del team se mantengan y evitar la rotación de integrantes en periodos cortos o medianos, permitiendole a el equipo poder centrarse full en el proyecto y poder generar confianza, sinergía, lazos interpersonales
+
+**Entregar Productos y Servicios**, se debe entregar un producto/servicio final funcional al cliente (que incluso podemos seguir iterando), se debe evitar en entregar eternos MVP (prototipos)
+
+**Alineación con el Manifiesto Ágil**, se debe alinearse con los valores y principios del manifiesto ágil
