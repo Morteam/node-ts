@@ -48,3 +48,41 @@ Las Historias de Usuario deben brindar información sin entrar en excesivo detal
 Cómo (Quién) Quiero (Qué) Para (Objetivo), ej:
 
 Cómo *estudiante del curso* quiero *aprender mucho en este curso* para *poder certificarme y tener un mejor trabajo*
+
+
+### Priorizar el Product Backlog
+
+Algunas variables a la hora de priorizar PBIs son:
+
+* Tiempo
+* Esfuerzo
+* Valor Funcional
+* Urgencia
+* Opinión de los Stakeholders
+* Opinión del equipo
+* Valor del Mercado (ROI - Return Of Investment)
+
+#### MoSCoW
+
+Prioriza los PBIs respecto a las variables de priorización a usar y a:
+
+Mo: Must have / Tenemos qué - Prioridad 1 Siempre se debe concluir
+S: Should / Deberíamos - Prioridad 2 Debemos tratar de concluirla
+Co: Could have / Podríamos - Prioridad 3 Si nos da el tiempo la concluimos
+W: Won't but would have / No ahora, pero... - Prioridad 4 No es necesario concluirla, pero si hay tiempo se concluye
+
+
+#### Kano
+
+Este método es realmente útil cuando se requiera una mayor personalización del Producto/Servicio de cara a un usuario demasiado especifico, consiste en clasificar los PBIs de acuerdo a 5 carácteristicas:
+
+* Atractiva:
+    Es una carácteristica de valor agregado, es un elemento diferenciador que aporta sin embargo si esta carácteristica no existe no pasa nada, su prioridad es baja
+* Unidimensional:
+    Carácteristicas que de estar el cliente estará contento, pero de no estar acorde a lo ofrecido el cliente estará molesto, no son carácteristicas necesarias
+* Requerida:
+    Carácteristica que el usuario espera que tenga el proyecto (necesario), de no estar los usuarios estarán realmente molestos, su prioridad es alta
+* Indiferente:
+    Carácteristicas que al cliente le dará exactamente igual si están o no, prioridad muy baja
+* Inversa:
+    Carácteristicas que están ligadas al usuario, a unos usuarios valorarán que estén mientras otros les desagrará que este
