@@ -37,7 +37,7 @@ Acorde al criterio de cada proyecto, se puede crear basado en Épicas > Historia
 
 El Principio de Pareto (20/80) indica que el 20% de algo genera el 80% de la causa, eso quiere decir que con el 20% de las Historias de Usuario deberíamos haber construido el 80% del Producto Final o haber creado el 80% del valor o utilidad del Producto Final.
 
-La idea es estimar con puntos las distintas Historia de Usuario acorde al Valor que darían al Producto Final y usar el Principio de Pareto para priorizar cuáles tareas deben realizarse primero de acuerdo al Valor que aportarán
+La idea es estimar con puntos las  distintas Historia de Usuario acorde al Valor que darían al Producto Final y usar el Principio de Pareto para priorizar cuáles tareas deben realizarse primero de acuerdo al Valor que aportarán
 
 ### Creando Historias de Usuario
 
@@ -71,7 +71,6 @@ S: Should / Deberíamos - Prioridad 2 Debemos tratar de concluirla
 Co: Could have / Podríamos - Prioridad 3 Si nos da el tiempo la concluimos
 W: Won't but would have / No ahora, pero... - Prioridad 4 No es necesario concluirla, pero si hay tiempo se concluye
 
-
 #### Kano
 
 Este método es realmente útil cuando se requiera una mayor personalización del Producto/Servicio de cara a un usuario demasiado especifico, consiste en clasificar los PBIs de acuerdo a 5 carácteristicas:
@@ -85,4 +84,43 @@ Este método es realmente útil cuando se requiera una mayor personalización de
 * Indiferente:
     Carácteristicas que al cliente le dará exactamente igual si están o no, prioridad muy baja
 * Inversa:
-    Carácteristicas que están ligadas al usuario, a unos usuarios valorarán que estén mientras otros les desagrará que este
+    Carácteristicas que están ligadas al usuario, a unos usuarios valorarán que estén mientras otros les desagradará que este
+
+#### Basado en ROI (Return of investment)
+
+Por cada PBIs el cliente le dará un valor que aportará a Producto mientras que los Developers darán un score al Esfuerzo de Creación, finalmente para saber el valor real de cada PBI se usará la formula:
+
+ROI = Valor del cliente / Esfuerzo de creación = Valor total
+
+Por ejemplo un PBI llamado "Crear menú de opciones por cada categoría" para el Cliente puede tener un Valor de 7 mientras que para los Developers un Esfuerzo de 2, usando la formula tenemos que el Valor Total de ese PBI es de 3.5
+
+El PO (Product Owner) priorizará las tareas (PBIs) que cumplan los criterios necesarios y que **tengan un Valor total más alto**
+
+#### Planificación Estratégica
+
+Se puntuará un PBI teniendo en cuenta: el Valor de negocio y la Urgencia dada por los Developers, ambos en una escala ascendente de 1 a 5, la formula será:
+
+PBI Valor = Valor de negocio x Urgencia de la tarea
+
+Cuanto más alto sea el resultado de la formula, mayor prioridad tendrá el PBI
+
+
+### Estimar el Product Backlog
+
+Definiciones de estimaciones:
+
+* Estimación Absoluta:
+    Esta estimación es muy usada en las metodologías tradicionales, los tiempos los define el Cliente o el Project Manager, aquí se carece de Flexibilidad, de Feedback, de Adaptación. Estamos atados a un deadline. Aquí por ejemplo se usará el Diagrama de Gantt
+* Estimación Relativa: 
+    Es el tipo de estimación que usa frameworks como Scrum
+
+#### Estimación Relativa
+
+Es la forma recomendada para trabajar con Scrum al momento de estimar
+
+No se estima por Horas o Días, se estima por Puntos (comparación), soló estiman quienes realmente van a desarrollar las tareas
+
+Ventajas:
+* No comprometer fechas que posiblemente no podamos cumplir
+* Estimaciones más precisas basadas en la forma de trabajar del Scrum Team
+* Estar atentos a distintas circunstancias que nos puedan complicar al momento de hacer algo 
