@@ -28,7 +28,7 @@ Scrum se conoce como el framework 3-5-3
 **Roles**, en Scrum los 3 roles son igual de importantes, la unión de estos roles conforman el Scrum Team
 * Scrum Master: Validar la correcta implementación de Scrum, la optimización/agilización de los procesos y gestionar la velocidad a la que se va a trabajar (junto con los desarrolladores) 
 * Product Owner: Encargado del QUE vamos a desarrollar
-* Developers: Encargado del COMO a desarrollar
+* Developers o Desarrolladores de Producto: Encargado del COMO a desarrollar
 
 **Ceremonias** o Eventos, en Scrum las 5 ceremonias:
 * Sprint: Evento correspondiente a un ciclo iterativo e incremental contenedor de todas las ceremonias, tiene una duración permanente y estable
@@ -40,4 +40,4 @@ Scrum se conoce como el framework 3-5-3
 **Artefactos**
 * Product Backlog (o Pila de Producto): Es una lista de tareas que vamos a realizar para poder conseguir el producto, esta a cargo del Product Owner. El compromiso del Scrum Team con el Product Backlog será lograr el Product Goal (Meta de Producto)
 * Sprint Backlog (o Pila del Sprint): Es una lista de tareas que vamos a realizar durante el Sprint para poder generar valor al Producto esta lista es obtenida del Product Backlog. El compromiso del Scrum Team con el Sprint Backlog será lograr el Sprint Goal (Meta del Sprint)
-* Incremento: Es la diferencia entre en inicio y el final del Sprint más la sumatoria de los Sprints anteriores, la idea con este Artefacto es transparentemente ver/evaluar el progreso en cada Sprint
+* Incremento: Es la diferencia entre el inicio y el final del Sprint más la sumatoria de los Sprints anteriores, la idea con este Artefacto es transparentemente ver/evaluar el progreso en cada Sprint

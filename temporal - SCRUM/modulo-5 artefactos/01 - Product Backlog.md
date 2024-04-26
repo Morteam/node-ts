@@ -118,9 +118,42 @@ Definiciones de estimaciones:
 
 Es la forma recomendada para trabajar con Scrum al momento de estimar
 
-No se estima por Horas o Días, se estima por Puntos (comparación), soló estiman quienes realmente van a desarrollar las tareas
+No se estima por Horas o Días, se estima por Puntos (comparación), soló estiman quienes realmente van a desarrollar las tareas.
+
+Si una tarea es muy grande se subdivirá
 
 Ventajas:
 * No comprometer fechas que posiblemente no podamos cumplir
 * Estimaciones más precisas basadas en la forma de trabajar del Scrum Team
-* Estar atentos a distintas circunstancias que nos puedan complicar al momento de hacer algo 
+* Estar atentos a distintas circunstancias que nos puedan complicar al momento de hacer algo.
+
+##### Tallas de camisetas
+
+Consiste en asignar una Talla de Camiseta a cada PBI de acuerdo al esfuerzo requerido, tomando como referencia la tarea más sencilla a la que se le asignará XS por defecto, las demás tareas se irán estimando comparativamente con esta tarea
+
+* XS: Una tarea simple
+* S: Más compleja que una XS
+* M: Más compleja que una S
+* L: Más compleja que una M
+* XL: Más compleja que una L
+
+El esfuerzo de cada tarea es discutido y decidido por los Desarrolladores
+
+##### Planning Poker
+
+Se tiene en cuenta la serie de Fibonnacci para asignar un valor de esfuerzo a cada PBI, cuanto más grande sea el número mayor esfuerzo representa para la tarea
+
+1 -> 2 -> 3 -> 5 -> 8 -> 13
+
+El esfuerzo de cada tarea es discutido y decidido por los Desarrolladores, cada uno de sus integrantes le dará un valor a cada PBI, luego al tiempo todos mostrarán su estimado y a partir de eso se buscará un consenso, si no se llegara a tal los integrantes que esten en desacuerdo expondrán el motivo por el cuál puntuaron dicha Tarea con ese valor (por lo general lo general sucede con los extremos ej: si se voto 1, 3, 5, los extremos son 1 y 5), finalmente se debe volver a votar para asignar el valor que tendrá la tarea (en último caso promediar hacía arriba)
+
+##### Canasta
+
+Se usa también el método Fibonnacci. Cada Desarrollador tiene unas tarjetas donde están detalladas las Tareas y hay aprox 6 Canastas
+con la secuencia de Fibonnacci, la idea es que cada Desarrollador ponga cada PBI (Tarea) en la canasta que según su criterio se adecua más al esfuerzo que se deberá invertir en dicha tarea
+
+La dínamica para la negociación de cada tarea será similar a la Planning Poker
+
+##### Votos
+
+El funcionamiento es similar a la Estimación por Canasta, con la diferencia que en este caso las Tareas serán por ejemplo Cartulinas con la descripción de la tarea y estarán sobre una mesa, mientras que los Desarrolladores tendrán Fichas de Poker por ejemplo con valores que representar la secuencia de Fibonnacci, y deberán puntuar según su criterio el esfuerzo de cada PBI
