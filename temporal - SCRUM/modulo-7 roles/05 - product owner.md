@@ -1,6 +1,7 @@
 ### Product Owner
 
 * Posee una visión a largo plazo del proyecto, dueño del "Qué construiremos"
+* Un PO por ST
 * Posee conocimientos avanzados del público, del mercado, de las tendencias, etc 
 * Dueño principal y encargado del PB (No dueño de los desarrolladores, ellos eligen cuanto y qué trabajo harán en cada Sprint)
 * Voz principal de los Stakeholders, gestionando correctamente el PB y los PBIs
@@ -21,3 +22,11 @@ Relación con el PB:
 * Ordenado permanentemente
 * Optimizado para aumentar el valor creado
 * Asegurarse que los PBIs sean claros
+
+Visión de Producto
+    -> Product Goal
+        -> Requisitos de producto PB (varios)
+            -> PBI - Épica (varios)
+                -> PBI - Historia de usuarios (varios)
+                    -> Tareas
+
