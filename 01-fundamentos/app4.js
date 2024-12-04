@@ -1,7 +1,8 @@
 /*
     * CODE EXECUTION
     - https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick
-    - https://www.builder.io/blog/visual-guide-to-nodejs-event-loop
+    - https://www.builder.io/blog/visual-guide-to-nodejs-event-loop !important
+    
     
     
     Node is composed by:
