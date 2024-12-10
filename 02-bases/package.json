@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sample": "node ./src/app.js",
-    "dev": "echo 'Hi dev ;)'"
+    "temp": "echo 'Hi dev ;)'",
+    "dev": "nodemon ./src/app.js"
   },
   "keywords": [
     "Node",
