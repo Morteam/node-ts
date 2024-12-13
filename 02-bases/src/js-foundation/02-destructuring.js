@@ -1,6 +1,10 @@
-console.log(process); // Data about Node processes (running libraries, inner processes, ...)
-console.log(process.title);
+// console.log(process); // Data about Node processes (running libraries, inner processes, ...)
+// console.log(process.title);
 
 const { TERM_PROGRAM, HOMEPATH, OS } = process.env;
 
-console.table({ TERM_PROGRAM, HOMEPATH, OS })
+// console.log({ TERM_PROGRAM, HOMEPATH, OS })
+
+const FRUITS = ['Peach', 'Apple', 'Banana', 'Strawberry', 'Pear'];
+
+const [, , , , PEAR] = FRUITS;
