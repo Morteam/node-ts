@@ -14,5 +14,9 @@
     "JS"
   ],
   "author": "Manu Castro",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "get-age": "^1.0.1",
+    "uuid": "^11.0.3"
+  }
 }
