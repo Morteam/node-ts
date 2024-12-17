@@ -1,7 +1,9 @@
-const { getAge } = require('./get-age.plugin')
-const { getUUID } = require('./get-uuid.plugin')
+import { getAge } from './get-age.plugin.js'
+import { getUUID } from './get-uuid.plugin.js'
+import { httpClientPlugin } from './http-client.plugin.js'
 
-module.exports = {
+export {
     getAge,
-    getUUID
+    getUUID,
+    httpClientPlugin,
 }

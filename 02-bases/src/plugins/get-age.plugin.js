@@ -1,4 +1,4 @@
-const getAgePlugin = require('get-age');
+import getAgePlugin from 'get-age';
 
 const getAge = (birthdate) => {
     if (!birthdate) return new Error('The birthdate does not exist')
@@ -6,6 +6,6 @@ const getAge = (birthdate) => {
     return getAgePlugin(birthdate)
 }
 
-module.exports = {
+export {
     getAge
 }
