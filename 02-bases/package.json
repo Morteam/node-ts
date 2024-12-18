@@ -17,6 +17,7 @@
   "author": "Manu Castro",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.9",
     "get-age": "^1.0.1",
     "uuid": "^11.0.3"
   }
