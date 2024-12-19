@@ -68,3 +68,10 @@ const pokemon = await getPokemonById(11, httpClientPlugin);
 
 console.log(pokemon.name)
 
+/* Logger */
+import { buildLogger } from './plugins/logger.plugin.js';
+
+const logger = buildLogger('app.js');
+
+logger.log('Hi from the moon v2')
+
