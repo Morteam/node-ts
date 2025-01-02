@@ -1,5 +1,5 @@
 {
-  "name": "03-ts",
+  "name": "04-bases-ts",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,8 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@types/node": "^22.10.2",
+    "@types/node": "^22.10.3",
+    "nodemon": "^3.1.9",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"

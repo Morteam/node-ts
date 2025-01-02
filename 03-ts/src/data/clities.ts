@@ -1,4 +1,10 @@
-const cities = [
+interface City {
+    id: number;
+    name: string;
+    country: string;
+}
+
+export const cities: City[] = [
     {
         id: 1,
         name: 'Amsterdam',
@@ -19,12 +25,9 @@ const cities = [
         name: 'Valparaiso',
         country: 'Chile'
     },
+    {
+        id: 5,
+        name: 'Auckland',
+        country: 'New Zealand'
+    },
 ]
-
-const getCityById = (id) => {
-    return cities.find(city => city.id === id)
-}
-
-const city = getCityById(5)
-
-console.log(city?.name ?? 'Hero undefined')
