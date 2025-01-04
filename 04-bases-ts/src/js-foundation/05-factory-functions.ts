@@ -1,5 +1,22 @@
-const buildMakePerson = ({ getAge, getUUID }) => {
-    return ({ name, birthdate }) => {
+interface BuildMakePersonProps {
+    getAge: (birthdate:string) => number|Error;
+    getUUID: () => string;
+};
+
+interface PersonProps {
+    name: string;
+    birthdate: string;
+}
+
+interface PersonResult {
+    id: string;
+    name: string;
+    birthdate: string;
+    age: number|Error;
+}
+
+export const buildMakePerson = ({ getAge, getUUID }:BuildMakePersonProps) => {
+    return ({ name, birthdate }:PersonProps):PersonResult => {
         return {
             id: getUUID(),
             name,
@@ -8,11 +25,6 @@ const buildMakePerson = ({ getAge, getUUID }) => {
         }
     }
 }
-
-module.exports = {
-    buildMakePerson,
-}
-
 
 
 
@@ -43,7 +55,7 @@ class Bicicleta extends Vehiculo {
 
 // Fabrica
 class FabricaDeVehiculos {
-    crearVehiculo(tipo) {
+    crearVehiculo(tipo:string) {
         if (tipo === "coche") {
             return new Coche();
         } else if (tipo === "bicicleta") {
@@ -80,7 +92,7 @@ class WordDocument {
 }
 
 class DocumentFactory {
-    createDoc(type) {
+    createDoc(type:string) {
         if (type === "PDF") {
             return new PDFDocument();
         } else if (type === "word") {
@@ -94,3 +106,7 @@ class DocumentFactory {
 const factorySample = new DocumentFactory();
 
 const pdfSample = factorySample.createDoc("PDF");
+
+
+
+// TODO: DO AN EXAMPLE OF CLASSES OF FACTORY AND ABSTRACT FACTORY METHOD

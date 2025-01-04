@@ -1,6 +1,11 @@
-https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Promise
+// https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-const getPokemonById = (id, callback) => {
+interface PokemonData {
+    name: string;
+    [key: string]: unknown;
+}
+
+export const getPokemonById = (id:number|string, callback?:Function):Promise<PokemonData> => {
     const API_URL = 'https://pokeapi.co/api/v2/pokemon/'
 
     // ❌1 Callback hell
@@ -38,5 +43,3 @@ const getPokemonById = (id, callback) => {
         .then(response => response.json())
         .then(data => data)
 }
-
-module.exports = getPokemonById;

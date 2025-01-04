@@ -12,8 +12,15 @@
 //     }
 // }
 
+interface HTTPClientProps {
+    get: (url: string) => Promise<any>;
+    post: () => Promise<void>;
+    put: () => Promise<void>;
+    delete: () => Promise<void>;
+}
+
 // 🙂2 With Adapter
-const getPokemonById = async(id, httpClient) => {
+export const getPokemonById = async(id:number|string, httpClient:HTTPClientProps) => {
     const API_BASE = 'https://pokeapi.co/api/v2/pokemon/'
     const API_URL = `${API_BASE}${id}`;
 
@@ -25,5 +32,3 @@ const getPokemonById = async(id, httpClient) => {
         throw new Error('Error: Something go wrong')
     }
 }
-
-export default getPokemonById;
