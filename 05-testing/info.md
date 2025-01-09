@@ -30,3 +30,6 @@ https://gist.github.com/Klerith/98d7b1bc0f1525e892f260813cad1007
 
 * install ``npm i -D jest @types/jest ts-jest supertest``, supertest allows us to test API REST
 * Create Jest config file ``npx jest --init``
+
+### DEBUG IN VS CODE
+Put the breakpoint in the file (exactly the number line), then appears a red dot, after, Ctrl + Shift + P and find "Debug npm script" and select the script to run for example: npm run test, npm run dev.. this command should be inside package.json

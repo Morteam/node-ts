@@ -5,6 +5,6 @@ const { TERM_PROGRAM, HOMEPATH, OS } = process.env;
 
 // console.log({ TERM_PROGRAM, HOMEPATH, OS })
 
-const FRUITS:string[] = ['Peach', 'Apple', 'Banana', 'Strawberry', 'Pear'];
+export const FRUITS:string[] = ['Peach', 'Apple', 'Banana', 'Strawberry', 'Pear'];
 
 const [, , , , PEAR] = FRUITS;
