@@ -31,7 +31,7 @@ export const buildMakePerson = ({ getAge, getUUID }:BuildMakePersonProps) => {
 
 
 
-
+/*
 
 // Clase Abstracta o Interfaz Común de los productos  
 class Vehiculo {
@@ -106,6 +106,8 @@ class DocumentFactory {
 const factorySample = new DocumentFactory();
 
 const pdfSample = factorySample.createDoc("PDF");
+
+*/
 
 
 

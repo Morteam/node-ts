@@ -2,6 +2,8 @@ import { User, USERS } from '../data/users.data'
 
 
 export function getUserById(id:number, callback:(user:User) => void) {
+    let result
+
     const user = USERS.find(function(user) {
         return id === user.id
     })
@@ -10,9 +12,9 @@ export function getUserById(id:number, callback:(user:User) => void) {
         throw new Error('Error: User not found')
     }
 
-    return callback(user)
-}
+    setTimeout(() => {
+        result = callback(user)
+    }, 4000)
 
-module.exports = {
-    getUserById,
+    return result
 }
