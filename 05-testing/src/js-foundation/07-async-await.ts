@@ -29,6 +29,6 @@ export const getPokemonById = async(id:number|string, httpClient:HTTPClientProps
 
         return pokemon;
     } catch(error) {
-        throw new Error('Error: Something go wrong')
+        throw new Error(`Error: the pokemon with the id ${id} does not exist`)
     }
 }
