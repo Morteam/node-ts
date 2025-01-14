@@ -9,4 +9,28 @@ describe('plugins/get-age', () => {
 
         expect(typeof ageResponse).toBe('number')
     })
+
+    test('getAge() should return 0 year', () => {
+        const BIRTHDATE = '1990-09-15'
+
+        const spy = jest.spyOn(Date.prototype, 'getFullYear').mockReturnValue(1990) // Allow to spy and manipulate a function
+
+        const ageResponse = getAge(BIRTHDATE)
+
+        expect(ageResponse).toBe(0)
+        expect(spy).toHaveBeenCalled()
+    })
+
+    test('getAge() with birthdate should throw error', () => {
+        const UNDEFINED_PARAM = undefined
+        const MESSAGE_ERROR = 'The birthdate does not exist'
+
+        try {
+            getAge(UNDEFINED_PARAM as any)
+        } catch(error) {
+            const typedError = error as Error
+
+            expect(typedError.message).toBe(MESSAGE_ERROR)
+        }
+    })
 })
