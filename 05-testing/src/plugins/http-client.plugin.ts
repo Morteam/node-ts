@@ -8,9 +8,15 @@ export const httpClientPlugin = {
 
         return data;
     },
-    post: async () => {},
-    put: async () => {},
-    delete: async () => {},
+    post: async () => {
+        throw new Error('Not Implemented')
+    },
+    put: async () => {
+        throw new Error('Not Implemented')
+    },
+    delete: async () => {
+        throw new Error('Not Implemented')
+    },
 };
 
 // With Fetch
