@@ -1,5 +1,5 @@
 import { describe, expect, jest, test } from '@jest/globals';
-import { httpClientPlugin } from '../../src/plugins/http-client.plugin';
+import { httpClientPlugin } from '@/plugins/http-client.plugin';
 
 describe('plugins/http-client', () => {
     test('httpClientPlugin.get() should return an string', async () => {

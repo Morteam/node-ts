@@ -1,4 +1,4 @@
-import { USERS, User } from '../data/users.data'
+import { USERS, User } from '@/data/users.data'
 
 export const getUserById = (id: number, callback:(user:User) => void) => {
     const user = USERS.find((user) => id === user.id)

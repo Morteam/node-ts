@@ -1,5 +1,5 @@
 import { describe, expect, jest, test } from '@jest/globals';
-import { getUUID } from '../../src/plugins/get-uuid.plugin';
+import { getUUID } from '@/plugins/get-uuid.plugin';
 
 describe('plugins/get-UUID', () => {
     test('getUUID() should return an id', () => {

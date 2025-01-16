@@ -1,5 +1,5 @@
 import { describe, expect, jest, test } from '@jest/globals';
-import { buildLogger, logger as winstonLogger } from '../../src/plugins/logger.plugin';
+import { buildLogger, logger as winstonLogger } from '@/plugins/logger.plugin';
 
 describe('plugins/logger', () => {
     test('buildLogger should return a logger function', () => {

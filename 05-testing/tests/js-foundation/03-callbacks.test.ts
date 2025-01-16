@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
-import { USERS } from '../../src/data/users.data';
-import { getUserById } from '../../src/js-foundation/03-callbacks';
+import { USERS } from '@/data/users.data';
+import { getUserById } from '@/js-foundation/03-callbacks';
 
 describe('js-foundation/03-callbacks', () => {
     test('getUserById should throw an error if user does not exist', () => {

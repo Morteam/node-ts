@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
-import { getPokemonById } from '../../src/js-foundation/07-async-await'
-import { httpClientPlugin } from '../../src/plugins/http-client.plugin';
+import { getPokemonById } from '@/js-foundation/07-async-await'
+import { httpClientPlugin } from '@/plugins/http-client.plugin';
 
 describe('js-foundations/07-async-await', () => {
     test('getPokemonById should return a Pokemón', async () => {

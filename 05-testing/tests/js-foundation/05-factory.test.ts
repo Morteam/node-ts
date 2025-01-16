@@ -1,5 +1,5 @@
 import { describe, expect, jest, test } from '@jest/globals';
-import { buildMakePerson } from '../../src/js-foundation/05-factory-functions'
+import { buildMakePerson } from '@/js-foundation/05-factory-functions'
 
 describe('js-foundations/05-factory', () => {
     // Mock responses

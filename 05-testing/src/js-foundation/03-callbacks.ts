@@ -1,4 +1,4 @@
-import { User, USERS } from '../data/users.data'
+import { User, USERS } from '@/data/users.data'
 
 
 export function getUserById(id:number, callback:(user:User) => void) {

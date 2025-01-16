@@ -1,5 +1,5 @@
 import { describe, expect, jest, test } from '@jest/globals';
-import { getAge } from '../../src/plugins/get-age.plugin';
+import { getAge } from '@/plugins/get-age.plugin';
 
 describe('plugins/get-age', () => {
     test('getAge() should return the age of a person', () => {

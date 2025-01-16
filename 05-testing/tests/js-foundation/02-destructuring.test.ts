@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { FRUITS } from '../../src/js-foundation/02-destructuring';
+import { FRUITS } from '@/js-foundation/02-destructuring';
 
 describe('js-foundation/02-destructuring', () => {
 
