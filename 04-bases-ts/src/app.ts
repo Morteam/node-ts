@@ -6,7 +6,7 @@ import { User } from './data/users.data';
 
 
 // import { getUserById } from './js-foundation/03-callbacks';
-
+/*
 import { getUserById } from './js-foundation/04-arrow-fns';
 
 getUserById(5, (user:User) => {
@@ -39,3 +39,9 @@ import { getPokemonById } from './js-foundation/07-async-await';
 const pokemonName = getPokemonById(14, httpClientPlugin) // Async-await
     .then(data => console.log('dt ', data.name))
     .catch(err => { throw new Error(err) })
+*/
+
+// LAB
+import main from './lab';
+
+main();
