@@ -1,0 +1,29 @@
+{
+  "name": "multiplication-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:w": "jest --watch",
+    "test:cv": "jest --coverage",
+    "dev": "ts-node src/app.ts",
+    "dev:nodemon": "nodemon",
+    "build": "npm run test && rimraf .dist && tsc",
+    "start": "node dist/app.js"
+  },
+  "author": "Manu Castro",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.7",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "rimraf": "^6.0.1",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

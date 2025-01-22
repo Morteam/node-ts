@@ -60,6 +60,28 @@ const main = () => {
         }
     }
 
+    class TabletProduct implements Product {
+        public name:string
+        public cost:number
+        public category:string
+        public discount:number
+        public description:string
+
+        constructor(tabletProps:ProductProps) {
+            const { name, cost, category, description, discount } = tabletProps
+
+            this.name = name;
+            this.cost = cost
+            this.category = category!
+            this.description = description
+            this.discount = discount || 0
+        }
+
+        greeting():string {
+            return `Ur phone is ${this.name}`
+        }
+    }
+
 
 
 
@@ -72,6 +94,17 @@ const main = () => {
             })
 
             return phoneProduct
+        }
+    }
+
+    class TabletCreator extends Creator {
+        public factoryMethod(tabletProps:ProductProps):Product {
+            const tabletProduct = new TabletProduct({
+                ...tabletProps,
+                category: 'Tablet'
+            })
+
+            return tabletProduct
         }
     }
 
@@ -99,6 +132,12 @@ const main = () => {
         name: 'DogBerry',
         description: 'Great phone',
         cost: 1100,
+    })
+
+    clientCode(TabletCreator, { // Improve this
+        name: 'DuckChicken',
+        description: 'Great tablet',
+        cost: 1700,
     })
 
 
