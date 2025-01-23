@@ -1,43 +1,19 @@
-import fs from 'fs' // File System
+import { yarg } from '@/plugins/yargs.plugin'
 
-const MULITIPLICATION_NUMBER = 7
+const { lotso, j, samp } = yarg;
 
-const createMultiplicationTable = (number:number, multiplier:number = 10):string => {
-    let table:string = ''
+console.log('SAMPLE 2');
+console.log(yarg);
+console.log(lotso);
+console.log(j);
+console.log(samp);
 
-    for(let i = 1; i <= multiplier; i++) {
-        table += `
-            ${i} x ${number} = ${number * i}
-        `
-    }
 
-    return table
-}
+// IIFE, Self-executing anonymous function + asynchronous
+(async () => {
+    function sample(phrase:string) {
+        console.log(`Sample executed: ${phrase}`)
+    }    
 
-const createTemplateMultiplication = (number:number, multiplier?:number):string => {
-    return `
-    ============================================
-    ============================================
-            Multiplication table: ${number}
-    ============================================
-    ============================================
-
-    ${createMultiplicationTable(number, multiplier)}
-    `
-}
-
-interface PrintDataProps {
-    filename:string
-    path:string
-    data:string
-}
-
-const printData = ({filename, path, data}:PrintDataProps) => {
-    fs.writeFileSync(`${path}${filename}.md`, data)
-}
-
-printData({
-    filename: `Table ${MULITIPLICATION_NUMBER}`,
-    path: './multiplication-tables/',
-    data: createTemplateMultiplication(MULITIPLICATION_NUMBER)
-})
+    await sample('Welcome to the Jungle, inside')
+})();
