@@ -3,27 +3,27 @@ import fs from 'fs' // File System
 const MULITIPLICATION_NUMBER = 11
 const HEADER_MESSAGE = 'Multiplication table'
 
-const createMultiplicationTable = (number:number, multiplier:number = 10):string => {
+const createMultiplicationTable = (base:number, limit:number = 10):string => {
     let table:string = ''
 
-    for(let i = 1; i <= multiplier; i++) {
+    for(let i = 1; i <= limit; i++) {
         table += `
-            ${i} x ${number} = ${number * i}
+            ${i} x ${base} = ${base * i}
         `
     }
 
     return table
 }
 
-const createTemplateMultiplication = (number:number, multiplier?:number):string => {
+const createTemplateMultiplication = (base:number, limit?:number):string => {
     return `
     ============================================
     ============================================
-            ${HEADER_MESSAGE}: ${number}
+            ${HEADER_MESSAGE}: ${base}
     ============================================
     ============================================
 
-    ${createMultiplicationTable(number, multiplier)}
+    ${createMultiplicationTable(base, limit)}
     `
 }
 
