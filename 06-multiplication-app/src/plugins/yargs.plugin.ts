@@ -8,7 +8,7 @@ export const yarg = yargs(hideBin(process.argv))
         demandOption: true, // Tht flag 'b' will be mandatory
         description: 'The multiplication table base'
     })
-    .option('b', {
+    .option('l', {
         alias: 'limit',
         type: 'number',
         default: 10,

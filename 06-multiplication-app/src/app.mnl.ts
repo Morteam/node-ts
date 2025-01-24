@@ -15,7 +15,7 @@ const createMultiplicationTable = (base:number, limit:number = 10):string => {
     return table
 }
 
-const createTemplateMultiplication = (base:number, limit?:number):string => {
+export const createTemplateMultiplication = (base:number, limit?:number):string => {
     return `
     ============================================
     ============================================
@@ -33,13 +33,13 @@ interface PrintDataProps {
     data:string
 }
 
-const printData = ({filename, path, data}:PrintDataProps) => {
+export const printData = ({filename, path, data}:PrintDataProps) => {
     fs.mkdirSync(path, {recursive: true}) // Create folders if they don't exist
     fs.writeFileSync(`${path}${filename}.md`, data)
 }
 
-printData({
-    filename: `Table ${MULITIPLICATION_NUMBER}`,
-    path: './outputs/',
-    data: createTemplateMultiplication(MULITIPLICATION_NUMBER)
-})
+// printData({
+//     filename: `Table ${MULITIPLICATION_NUMBER}`,
+//     path: './outputs/',
+//     data: createTemplateMultiplication(MULITIPLICATION_NUMBER)
+// })
