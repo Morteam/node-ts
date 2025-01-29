@@ -1,5 +1,5 @@
 import { yarg } from '@/plugins/yargs.plugin';
-import { createTemplateMultiplication, printData } from '@/app.mnl';
+import { ServerApp } from './presentation/server-app';
 
 // IIFE, Self-executing anonymous function + asynchronous
 (async () => {
@@ -7,13 +7,7 @@ import { createTemplateMultiplication, printData } from '@/app.mnl';
 })();
 
 async function main() {
-    const { b:base, l:limit, s:showTable } = yarg;
+    const {b:base, l:limit, s:showTable} = yarg
 
-    const result = createTemplateMultiplication(base, limit)
-    printData({
-        filename: `Table ${base}`,
-        path: './outputs/',
-        data: result
-    })
-    showTable && console.log('result ', result)
+    ServerApp.run({base, limit, showTable})
 }  
