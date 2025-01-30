@@ -7,7 +7,14 @@ import { ServerApp } from './presentation/server-app';
 })();
 
 async function main() {
-    const {b:base, l:limit, s:showTable} = yarg
+    const {
+        b:base,
+        d:destination,
+        e:extension,
+        l:limit,
+        n:filename,
+        s:showTable
+    } = yarg
 
-    ServerApp.run({base, limit, showTable})
+    ServerApp.run({base, destination, extension, filename, limit, showTable}) // Or simply pass Yargs
 }  

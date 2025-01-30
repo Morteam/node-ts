@@ -20,6 +20,24 @@ export const yarg = yargs(hideBin(process.argv))
         default: false,
         description: 'Show multiplication table',
     })
+    .option('n', {
+        alias: 'filename',
+        type: 'string',
+        default: 'multiplication-table',
+        description: 'Set the filename (default: multiplication-table)'
+    })
+    .option('e', {
+        alias: 'extension',
+        type: 'string',
+        default: 'md',
+        description: 'Set the file extension (default: md)'
+    })
+    .option('d', {
+        alias: 'destination',   
+        type: 'string',
+        default: 'outputs',
+        description: 'set the path of destination (default: output)'
+    })
     .check((argv, _options) => { // Validations
         const { b } = argv
 

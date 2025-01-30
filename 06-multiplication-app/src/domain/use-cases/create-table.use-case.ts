@@ -1,10 +1,10 @@
-interface CreateTableProps {
+interface CreateTableOptions {
     base:number
-    limit?:number
+    limit:number
 }
 
 interface CreateTableUseCase {
-    execute: (props:CreateTableProps) => string
+    execute: (options:CreateTableOptions) => string
 }
 
 export class CreateTable implements CreateTableUseCase {
@@ -12,8 +12,16 @@ export class CreateTable implements CreateTableUseCase {
         /* Dependency Injection */
     }
 
-    execute({base, limit = 10}:CreateTableProps) {
-        let table:string = ''
+    execute({base, limit}:CreateTableOptions) {
+        const HEADER_MESSAGE = 'Multiplication table'
+
+        let table:string = `
+        ============================================
+        ============================================
+                ${HEADER_MESSAGE}: ${base}
+        ============================================
+        ============================================
+        `
 
         for(let i = 1; i <= limit; i++) {
             table += `
