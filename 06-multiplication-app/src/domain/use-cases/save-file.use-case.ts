@@ -1,10 +1,10 @@
 import fs from 'fs'
 
 export interface SaveFileOptions {
-    extension:string
-    fileName:string
+    extension?:string
+    fileName?:string
     fileContent:string
-    destination:string
+    destination?:string
 }
 
 export interface SaveFileUseCase {
@@ -16,7 +16,12 @@ export class SaveFile implements SaveFileUseCase {
         /* HERE REPOSITORY */
     }
 
-    execute({destination, fileName, fileContent, extension}:SaveFileOptions) {
+    execute({
+        destination = 'outputs',
+        fileName = 'table',
+        fileContent,
+        extension = 'md'
+    }:SaveFileOptions) {
         /*! TEMPORAL: The idea isn't to have dependencies like fs HERE */
 
         try {

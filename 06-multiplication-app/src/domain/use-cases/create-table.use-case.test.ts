@@ -24,7 +24,8 @@ describe('CreateTableUseCase', () => {
         }
         const TITLE_BREAKLINES = 6;
 
-        const multiplicationTable = new CreateTable().execute(MOCKED_OPTIONS);
+        const table = new CreateTable()
+        const multiplicationTable = table.execute(MOCKED_OPTIONS);
         const rows = multiplicationTable.split('\n').length;
 
         expect(multiplicationTable).toContain('1 x 7 = 7')
