@@ -31,6 +31,10 @@ describe('SaveFileUseCase', () => {
             fs.rmSync(DEFAULT_OPTIONS.filePath)
         }
 
+        if(fs.existsSync(CUSTOM_PATH)) {
+            fs.rmSync(CUSTOM_PATH)
+        }
+
         // Remove complete folder
         // fs.rmSync('outputs', {recursive: true})
     })
@@ -58,6 +62,6 @@ describe('SaveFileUseCase', () => {
 
         expect(resultSaveFile).toBeTruthy()
         expect(fileExists).toBeTruthy()
-        expect(fileContent).toBe(MOCKED_OPTIONS.fileContent)
+        expect(fileContent).toBe(CUSTOM_OPTIONS.fileContent)
     })
 })
