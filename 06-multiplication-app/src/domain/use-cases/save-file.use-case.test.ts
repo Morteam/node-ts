@@ -25,6 +25,10 @@ describe('SaveFileUseCase', () => {
     // afterEach()
     // afterAll()
 
+    beforeEach(() => {
+        jest.clearAllMocks() // Clean the traditional jest.fn()
+    })
+
     afterEach(() => {
         // Remove file created in the test
         if(fs.existsSync(DEFAULT_OPTIONS.filePath)) {
@@ -63,5 +67,32 @@ describe('SaveFileUseCase', () => {
         expect(resultSaveFile).toBeTruthy()
         expect(fileExists).toBeTruthy()
         expect(fileContent).toBe(CUSTOM_OPTIONS.fileContent)
+    })
+
+    test('Should return false if the directory could not be created', () => {
+        const saveFile = new SaveFile()
+        const mkDirSpy = jest.spyOn(fs, 'mkdirSync').mockImplementation( // mockImplementation owverwrites the method
+            () => { throw new Error('This is a custom message from testing') }
+        ) // 'fs' is the path or lib and 'mkdirSync' is the method to spy
+        const resultSaveFile = saveFile.execute(CUSTOM_OPTIONS)
+
+        expect(resultSaveFile).toBeFalsy()
+        expect(mkDirSpy).toHaveBeenCalledTimes(1)
+
+        // mkDirSpy.mockReset() // Clean the executions of or spy but the implementation continue
+        mkDirSpy.mockRestore() // Delete our spy implementation
+    })
+
+    test('Should return false if the file could not be created', () => {
+        const saveFile = new SaveFile()
+        const writeFileSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation( // mockImplementation owverwrites the method
+            () => { throw new Error('This is a custom message from testing -writing-') }
+        ) // 'fs' is the path or lib and 'writeFileSync' is the method to spy
+        const resultSaveFile = saveFile.execute(CUSTOM_OPTIONS)
+
+        expect(resultSaveFile).toBeFalsy()
+        expect(writeFileSpy).toHaveBeenCalledTimes(1)
+
+        writeFileSpy.mockRestore() // Delete our spy implementation
     })
 })
