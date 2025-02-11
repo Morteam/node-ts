@@ -11,7 +11,7 @@ interface ServerProps {
 }
 
 export class ServerApp {
-    static run({base, destination, extension, filename, limit, showTable}:ServerProps) {
+    static run({base, destination, extension, filename, limit, showTable = false}:ServerProps) {
         console.log('Running 🏃‍♂️‍➡️🏃‍♂️‍➡️')
 
         const multiplicationTable = new CreateTable().execute({base, limit})
