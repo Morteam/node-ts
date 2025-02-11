@@ -51,7 +51,7 @@ describe('ServerApp', () => { // fs.rmSync('outputs', {recursive: true})
 
         const consoleLogMock = jest.fn()
         const consoleErrorMock = jest.fn()
-        const createTableMock =
+        const createTableMock = 
             jest.fn().mockReturnValue(MOCK_RESPONSE_CREATE_TABLE) as ({base, limit}: CreateTableOptions) => string
         const saveFileMock =
             jest.fn().mockReturnValue(MOCK_RESPONSE_SAVE_FILE) as ({fileContent, destination, fileName}:SaveFileOptions)=>boolean;
@@ -70,5 +70,31 @@ describe('ServerApp', () => { // fs.rmSync('outputs', {recursive: true})
         expect(saveFileMock).toHaveBeenCalledWith({destination, extension, fileContent: MOCK_RESPONSE_CREATE_TABLE, fileName: filename})
         expect(consoleLogMock).toHaveBeenCalledWith('File created!')
         expect(consoleErrorMock).not.toHaveBeenCalled()
+    })
+
+    test('Should run ServerApp shouw an error', () => {
+        const MOCK_RESPONSE_CREATE_TABLE = '1 x 2 = 2'
+        const MOCK_RESPONSE_SAVE_FILE = false
+
+        const consoleLogMock = jest.fn()
+        const consoleErrorMock = jest.fn()
+        const createTableMock = 
+            jest.fn().mockReturnValue(MOCK_RESPONSE_CREATE_TABLE) as ({base, limit}: CreateTableOptions) => string
+        const saveFileMock =
+            jest.fn().mockReturnValue(MOCK_RESPONSE_SAVE_FILE) as ({fileContent, destination, fileName}:SaveFileOptions)=>boolean;
+
+        const { base, limit, extension, destination, filename } = OPTIONS
+
+        console.log = consoleLogMock
+        console.error = consoleErrorMock
+        CreateTable.prototype.execute = createTableMock
+        SaveFile.prototype.execute = saveFileMock
+
+        ServerApp.run(OPTIONS)
+
+        expect(consoleLogMock).toHaveBeenCalledWith('Running 🏃‍♂️‍➡️🏃‍♂️‍➡️')
+        expect(createTableMock).toHaveBeenCalledWith({base, limit})
+        expect(saveFileMock).toHaveBeenCalledWith({destination, extension, fileContent: MOCK_RESPONSE_CREATE_TABLE, fileName: filename})
+        expect(consoleErrorMock).toHaveBeenCalledWith('Error!')
     })
 })

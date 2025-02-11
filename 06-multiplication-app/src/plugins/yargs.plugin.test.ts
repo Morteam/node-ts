@@ -33,8 +33,6 @@ describe('Yargs plugin', () => {
     test('Should return config with custom values', async () => {
         const argv = await simulateRunCommand(['-b', '99', '-l', '12', '-s', '-n', 'test-table', '-e', 'txt', '-d', 'test-outputs']);
 
-        console.log(argv)
-
         expect(argv).toEqual(expect.objectContaining({
             b: 99,
             l: 12,
