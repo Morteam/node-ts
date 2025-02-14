@@ -1,5 +1,11 @@
+import { CronService } from './cron/cron-service';
+
 export class Server {
     static run() {
-        console.log('Server is running...')
+
+        CronService.createJob('*/4 * * * * *', () => {
+            console.log('4 Seconds Nigga', new Date())
+        });
+
     }
 }
