@@ -18,15 +18,11 @@ export class CheckService implements CheckServiceUseCase {
 
             if(!request.ok) throw new Error('The server is down :(')
 
-            console.log(`All good!`)
-
             this.successCallback()
 
             return true;
         } catch(error) {
-            console.log(`${error}: :(`)
-
-            this.errorCallback('Error from callback')
+            this.errorCallback(`${error}: :(`)
 
             return false;
         }
