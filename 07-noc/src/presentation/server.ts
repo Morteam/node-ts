@@ -1,6 +1,7 @@
 import { CronService } from './cron/cron-service';
 import { CheckService, SuccessCallback, ErrorCallback } from '../domain/use-cases/checks/check-service.use-case'
 import { FileSystemDatasource } from '../infraestructure/datasources/file-system.datasource';
+import { LogSeverity } from '../domain/entities/log.entity';
 
 export class Server {
     static run() {
@@ -16,7 +17,13 @@ export class Server {
         });
 
         // Temporal
-        const fsDS = new FileSystemDatasource()
+        // const fsDS = new FileSystemDatasource()
+
+        // fsDS.saveLog({
+        //     level: LogSeverity.medium,
+        //     message: 'Hi ...',
+        //     createdAd: new Date()
+        // })
 
     }
 }
