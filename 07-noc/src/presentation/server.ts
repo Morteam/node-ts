@@ -1,5 +1,6 @@
 import { CronService } from './cron/cron-service';
 import { CheckService, SuccessCallback, ErrorCallback } from '../domain/use-cases/checks/check-service.use-case'
+import { FileSystemDatasource } from '../infraestructure/datasources/file-system.datasource';
 
 export class Server {
     static run() {
@@ -13,6 +14,9 @@ export class Server {
         CronService.createJob('*/3 * * * * *', async () => {
             console.log(`3 Seconds: google is ${await new CheckService(successCheckService, errorCheckService).execute(URL_TO_CHECK) ? 'OK' : 'down'}`)
         });
+
+        // Temporal
+        const fsDS = new FileSystemDatasource()
 
     }
 }
