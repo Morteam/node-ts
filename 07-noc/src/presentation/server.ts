@@ -4,7 +4,7 @@ import { FileSystemDatasource } from '../infraestructure/datasources/file-system
 import { LogSeverity } from '../domain/entities/log.entity';
 
 export class Server {
-    static run() {
+    static async run() {
 
         // const URL_TO_CHECK = 'http://www.google.com'
         const URL_TO_CHECK = 'http://localhost:3000/posts' // Pseudo server run with JSON Server
@@ -16,8 +16,12 @@ export class Server {
             console.log(`3 Seconds: google is ${await new CheckService(successCheckService, errorCheckService).execute(URL_TO_CHECK) ? 'OK' : 'down'}`)
         });
 
-        // Temporal
-        // const fsDS = new FileSystemDatasource()
+        //! TEMPORAL
+        const fsDS = new FileSystemDatasource()
+
+        const lowLogs = await fsDS.getLogs(LogSeverity.low)
+
+        console.log(lowLogs)
 
         // fsDS.saveLog({
         //     level: LogSeverity.medium,

@@ -1,7 +1,7 @@
 import { Server } from './presentation/server'
 
 const main = async () => {
-    Server.run()
+   await Server.run()
 }
 
 (async () => {
