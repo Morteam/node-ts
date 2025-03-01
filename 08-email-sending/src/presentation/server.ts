@@ -22,11 +22,22 @@ export class Server {
         // });
 
         const sendEmailService = new EmailService()
-        sendEmailService.sendEmail({
-            to: 'manuel.castro22@outlook.com',
-            subject: 'Hi from the moon v1',
-            htmlBody: `<h1>Hi Joshua</h1>`
-        })
+        await sendEmailService.sendEmailWithFSLogs('manuel.castro22@outlook.com')
+        // sendEmailService.sendEmail({
+        //     to: 'manuel.castro22@outlook.com',
+        //     subject: 'Hi from the moon v1',
+        //     htmlBody: `<h2>Logs</h2>`,
+        //     attachments: [
+        //         {
+        //             filename: 'lotso.jpg',
+        //             path: 'https://i.blogs.es/8bdd1a/lotso/1200_800.jpeg'
+        //         },
+        //         {
+        //             filename: 'logs-all.log',
+        //             path: './logs/logs-all.log'
+        //         }
+        //     ]
+        // })
 
     }
 }
