@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import { envs } from '../../config/plugins/envs.plugin';
 import { Attachment } from 'nodemailer/lib/mailer';
+import { LogEntity, LogSeverity } from '../../domain/entities/log.entity';
 
 export interface SendEmailProps {
     to: string | string[];
@@ -17,6 +18,8 @@ export class EmailService {
             pass: envs.MAILER_SECRET_KEY
         }
     })
+
+    constructor(){}
 
     async sendEmail(props: SendEmailProps):Promise<boolean> {
         const { to, subject, htmlBody, attachments = [] } = props;
@@ -61,6 +64,6 @@ export class EmailService {
             ]
         }
 
-        await this.sendEmail(dataToSend)
+        return await this.sendEmail(dataToSend)
     }
 }

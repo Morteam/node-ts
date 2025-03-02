@@ -1,12 +1,15 @@
 import { CronService } from './cron/cron-service';
 import { CheckService, SuccessCallback, ErrorCallback } from '../domain/use-cases/checks/check-service.use-case'
+import { SendEmailLogs } from '../domain/use-cases/email/send-email-logs.use-case';
 import { FileSystemDatasource } from '../infraestructure/datasources/file-system.datasource';
 import { LogRepositoryImpl } from '../infraestructure/repositories/log.repository';
 import { EmailService } from './email/email-service';
 
-const fileSystemLogRepository = new LogRepositoryImpl(
+const fileSystemLogRepository = new LogRepositoryImpl( // It is a "general way" of using a functionality, for example, hosting a log through a repository, either from file systems or from a database.
     new FileSystemDatasource()
 );
+
+const emailService = new EmailService();
 
 export class Server {
     static async run() {
@@ -21,23 +24,10 @@ export class Server {
         //     console.log(`3 Seconds: google is ${await new CheckService(fileSystemLogRepository, successCheckService, errorCheckService).execute(URL_TO_CHECK) ? 'OK' : 'down'}`)
         // });
 
-        const sendEmailService = new EmailService()
-        await sendEmailService.sendEmailWithFSLogs('manuel.castro22@outlook.com')
-        // sendEmailService.sendEmail({
-        //     to: 'manuel.castro22@outlook.com',
-        //     subject: 'Hi from the moon v1',
-        //     htmlBody: `<h2>Logs</h2>`,
-        //     attachments: [
-        //         {
-        //             filename: 'lotso.jpg',
-        //             path: 'https://i.blogs.es/8bdd1a/lotso/1200_800.jpeg'
-        //         },
-        //         {
-        //             filename: 'logs-all.log',
-        //             path: './logs/logs-all.log'
-        //         }
-        //     ]
-        // })
-
+        // SEND EMAIL
+        new SendEmailLogs(
+            emailService,
+            fileSystemLogRepository
+        ).execute('manuel.castro22@outlook.com')
     }
 }
