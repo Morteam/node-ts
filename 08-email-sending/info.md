@@ -12,3 +12,18 @@ In this project I'll use Gmail account with Nodemailer
 requestions:
 * 2 step verification able in Gmail account
 * Add "App passwords" in "https://myaccount.google.com/u/1/apppasswords"
+
+#### Docker + Mongo
+1. Start Docker Desktop
+2. Create a docker-compose.yml with some config options:
+    version: image version
+    services:
+        mongo-fb:
+            image: version of image of Mongo (ex: mongo:6.0.6)
+            restart: "always", for run always that Docker Desktop run
+            environment: environment vars, thar it get from .env
+            volumes: where the data was hosted
+            ports: where we cna connect with it
+3. run ``docker --version``
+4. run ``docker compose up`` or ``docker compose up -d`` run the docker-compose.yml file
+5. open Mongo DB Compass with the connection: mongodb://localhost:27017 and the user and pass of the .env
