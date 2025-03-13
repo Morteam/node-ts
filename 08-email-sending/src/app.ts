@@ -20,13 +20,20 @@ const main = async () => {
 
     //* TEMPORAL!
     //* Create document (instance)
-    const newLog = await LogModel.create({
-        message: 'Log Message from Mongo',
-        origin: 'app.ts'
-    })
+    // const newLog = await LogModel.create({
+    //     message: 'Log Message from Mongo v1',
+    //     origin: 'app.ts',
+    //     level: 'medium',
+    // })
 
     //* Save it in the DB
-    await newLog.save();
+    // await newLog.save();
+
+
+    //* Get all data from the Collection
+    const data = await LogModel.find();
+
+    console.log(data)
 
 
 
