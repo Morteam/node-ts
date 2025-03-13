@@ -9,14 +9,14 @@ const main = async () => {
 }
 
 (async () => {
-    // await main()
+    await main()
 
-    console.log('SFSD44')
+    // console.log('SFSD44')
     
-    await MongoDatabase.connect({
-        mongoURL: envs.MONGO_URL,
-        dbName: envs.MONGO_DB_NAME
-    })
+    // await MongoDatabase.connect({
+    //     mongoURL: envs.MONGO_URL,
+    //     dbName: envs.MONGO_DB_NAME
+    // })
 
     //* TEMPORAL!
     //* Create document (instance)
@@ -31,9 +31,9 @@ const main = async () => {
 
 
     //* Get all data from the Collection
-    const data = await LogModel.find();
+    // const data = await LogModel.find();
 
-    console.log(data)
+    // console.log(data)
 
 
 
