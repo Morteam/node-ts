@@ -1,7 +1,7 @@
 import { Server } from './presentation/server'
 
 import { envs } from './config/plugins/envs.plugin';
-import { MongoDatabase } from './data/mongo';
+import { LogModel, MongoDatabase } from './data/mongo';
 
 
 const main = async () => {
@@ -17,4 +17,17 @@ const main = async () => {
         mongoURL: envs.MONGO_URL,
         dbName: envs.MONGO_DB_NAME
     })
+
+    //* TEMPORAL!
+    //* Create document (instance)
+    const newLog = await LogModel.create({
+        message: 'Log Message from Mongo',
+        origin: 'app.ts'
+    })
+
+    //* Save it in the DB
+    await newLog.save();
+
+
+
 })()
