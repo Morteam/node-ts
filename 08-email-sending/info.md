@@ -8,7 +8,7 @@ Cron is a lib to run timed task (for execute tasks in differents times)
 #### Nodemailer
 Send emails from Node js (It's a part, the software that connects is missing so that it can be sent correctly)
 
-In this project I'll use Gmail account with Nodemailer
+In this project I'll use Gmail account with Nodemailerb
 requestions:
 * 2 step verification able in Gmail account
 * Add "App passwords" in "https://myaccount.google.com/u/1/apppasswords"
@@ -27,3 +27,6 @@ requestions:
 3. run ``docker --version``
 4. run ``docker compose up`` or ``docker compose up -d`` run the docker-compose.yml file
 5. open Mongo DB Compass with the connection: mongodb://localhost:27017 and the user and pass of the .env
+
+#### Mongoose
+Allows connect Node + Mongo DB
