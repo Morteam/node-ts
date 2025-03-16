@@ -7,37 +7,54 @@ export enum LogSeverity {
 export interface LogEntityProps {
     level: LogSeverity;
     message: string;
-    createdAd?: Date;
+    createdAt?: Date;
     origin: string;
 }
 
 export class LogEntity {
     public level: LogSeverity;
     public message: string;
-    public createdAd: Date;
+    public createdAt: Date;
     public origin: string;
 
     constructor(props: LogEntityProps) {
-        const {level, message, createdAd = new Date(), origin} = props;
+        const {level, message, createdAt = new Date(), origin} = props;
 
         this.level = level
         this.message = message
-        this.createdAd = createdAd
+        this.createdAt = createdAt
         this.origin = origin;
     }
 
+    // Mapper
     static fromJSON(json: string): LogEntity {
-        const { message, level, createdAd, origin } = JSON.parse(json)
+        const { message, level, createdAt, origin } = JSON.parse(json)
 
         if(!message) throw new Error('Message is required')
         if(typeof message !== 'string') throw new Error('Message invalid')
         if(!level) throw new Error('Level is required')
         if(!Object.values(LogSeverity).includes(level as LogSeverity)) throw new Error('Level invalid')
-        if(!createdAd) throw new Error('Date is required')
+        if(!createdAt) throw new Error('Date is required')
 
-        const log = new LogEntity({message, level, createdAd, origin})
-        log.createdAd = new Date(createdAd)
+        const log = new LogEntity({message, level, createdAt, origin})
+        log.createdAt = new Date(createdAt)
 
         return log;
+    }
+
+    // Mapper
+    static fromObject(obj: {[key: string]: any}): LogEntity {
+        const { message, level, createdAt, origin } = obj;
+
+        if(!message) throw new Error('Message is required')
+        if(typeof message !== 'string') throw new Error('Message invalid')
+        if(!level) throw new Error('Level is required')
+        if(!Object.values(LogSeverity).includes(level as LogSeverity)) throw new Error('Level invalid')
+        if(!createdAt) throw new Error('Date is required')
+
+        const log = new LogEntity({message, level, createdAt, origin})
+        log.createdAt = new Date(createdAt)
+
+        return log
     }
 }

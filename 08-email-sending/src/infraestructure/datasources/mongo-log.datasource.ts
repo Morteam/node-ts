@@ -3,7 +3,7 @@ import { LogModel, MongoDatabase } from '../../data/mongo';
 import { LogDatasource } from '../../domain/datasources/log.datasource';
 import { LogEntity, LogSeverity } from '../../domain/entities/log.entity';
 
-export class MongoDataSource implements LogDatasource {
+export class MongoLogDataSource implements LogDatasource {
     constructor() {
         this.connect()
     }
@@ -23,7 +23,7 @@ export class MongoDataSource implements LogDatasource {
     }
 
     async saveLog(log: LogEntity): Promise<void> {
-        //? Try catch
+        //? Try catch 
         const newLog = await LogModel.create(log)
 
         await newLog.save()
@@ -31,8 +31,12 @@ export class MongoDataSource implements LogDatasource {
 
     async getLogs(severityLevel: LogSeverity): Promise<LogEntity[]> {
         //? Try catch
-        const mongoLogs = await LogModel.find({level: severityLevel}) as LogEntity[];
+        // const mongoLogs = await LogModel.find({level: severityLevel}) as LogEntity[];
+        const mongoLogs = await LogModel.find({level: severityLevel});
 
-        return mongoLogs;
+        // Mapper implementation
+        const logs = mongoLogs.map(LogEntity.fromObject) // Similar to mongoLogs.map(mongoLog => LogEntity.fromObject(mongoLog))
+
+        return logs;
     }
 }

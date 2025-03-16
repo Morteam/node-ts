@@ -1,7 +1,7 @@
 import { CronService } from './cron/cron-service';
 import { CheckService, SuccessCallback, ErrorCallback } from '../domain/use-cases/checks/check-service.use-case'
 import { SendEmailLogs } from '../domain/use-cases/email/send-email-logs.use-case';
-import { FileSystemDatasource, MongoDataSource } from '../infraestructure/datasources';
+import { FileSystemDatasource, MongoLogDataSource } from '../infraestructure/datasources';
 import { LogRepositoryImpl } from '../infraestructure/repositories/log.repository';
 import { EmailService } from './email/email-service';
 //* Temporal
@@ -12,7 +12,7 @@ const fileSystemLogRepository = new LogRepositoryImpl( // It is a "general way" 
 );
 
 const mongoLogRepository = new LogRepositoryImpl(
-    new MongoDataSource()
+    new MongoLogDataSource()
 );
 
 const emailService = new EmailService();
