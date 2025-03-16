@@ -28,5 +28,13 @@ requestions:
 4. run ``docker compose up`` or ``docker compose up -d`` run the docker-compose.yml file
 5. open Mongo DB Compass with the connection: mongodb://localhost:27017 and the user and pass of the .env
 
+*. running ``docker compose up -d``, docker download the new files and run the docker-compose.yml
+
 #### Mongoose
 Allows connect Node + Mongo DB
+
+* In desktop, use the Mongo db Compass app
+
+#### Postgres SQL
+
+* In desktop, use the Table plus app

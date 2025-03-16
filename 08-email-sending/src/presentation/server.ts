@@ -8,8 +8,8 @@ import { EmailService } from './email/email-service';
 import { LogEntity, LogSeverity } from '../domain/entities/log.entity';
 
 const logRepository = new LogRepositoryImpl( // It is a "general way" of using a functionality, for example, hosting a log through a repository, either from file systems or from a database.
-    new FileSystemDatasource(),
-    // new MongoLogDataSource(),
+    // new FileSystemDatasource(),
+    new MongoLogDataSource(),
 );
 
 const emailService = new EmailService();
