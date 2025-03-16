@@ -9,14 +9,14 @@ export class MongoLogDataSource implements LogDatasource {
     }
 
     private async connect() {
+        // This should be instance like Singleton
         try {
-            // ! Await?
-            MongoDatabase.connect({
+            await MongoDatabase.connect({
                 mongoURL: envs.MONGO_URL,
                 dbName: envs.MONGO_DB_NAME,
             })
 
-            console.log('Mongo connected')
+            console.log('Mongo connected DataSource')
         } catch(error) {
             console.error('Mongo can not connect')
         }

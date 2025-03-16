@@ -5,14 +5,11 @@ import { FileSystemDatasource, MongoLogDataSource } from '../infraestructure/dat
 import { LogRepositoryImpl } from '../infraestructure/repositories/log.repository';
 import { EmailService } from './email/email-service';
 //* Temporal
-import { LogEntity } from '../domain/entities/log.entity';
+import { LogEntity, LogSeverity } from '../domain/entities/log.entity';
 
-const fileSystemLogRepository = new LogRepositoryImpl( // It is a "general way" of using a functionality, for example, hosting a log through a repository, either from file systems or from a database.
-    new FileSystemDatasource()
-);
-
-const mongoLogRepository = new LogRepositoryImpl(
-    new MongoLogDataSource()
+const logRepository = new LogRepositoryImpl( // It is a "general way" of using a functionality, for example, hosting a log through a repository, either from file systems or from a database.
+    new FileSystemDatasource(),
+    // new MongoLogDataSource(),
 );
 
 const emailService = new EmailService();
@@ -20,28 +17,28 @@ const emailService = new EmailService();
 export class Server {
     static async run() {
 
-        // const URL_TO_CHECK = 'http://www.google.com'
-        const URL_TO_CHECK = 'http://localhost:3000/posts' // Pseudo server run with JSON Server
+        const URL_TO_CHECK = 'http://www.google.com'
+        // const URL_TO_CHECK = 'http://localhost:3000/posts' // Pseudo server run with JSON Server
 
         const successCheckService: SuccessCallback = () => console.log('WWWEEEEELLLLLL 😌')
         const errorCheckService: ErrorCallback = (error: string) => console.log(error)
 
         // CronService.createJob('*/3 * * * * *', async () => {
-        //     console.log(`3 Seconds: google is ${await new CheckService(fileSystemLogRepository, successCheckService, errorCheckService).execute(URL_TO_CHECK) ? 'OK' : 'down'}`)
+        //     console.log(`3 Seconds: google is ${await new CheckService(logRepository, successCheckService, errorCheckService).execute(URL_TO_CHECK) ? 'OK' : 'down'}`)
         // });
 
         //* Email
         // SEND EMAIL
         // new SendEmailLogs(
         //     emailService,
-        //     fileSystemLogRepository
+        //     logRepository
         // ).execute('manuel.castro22@outlook.com')
 
         //* Mongo
         //* use useCase (???)
         //* Get logs
-        const logsFilteredFromMongo = await mongoLogRepository.getLogs('high' as any); // Temporal
-        console.log('logsFilteredFromMongo', logsFilteredFromMongo)
+        const logsFiltered = await logRepository.getLogs(LogSeverity.medium);
+        console.log('logsFiltered', logsFiltered)
 
         //* Create Log
         // const logSample = {
