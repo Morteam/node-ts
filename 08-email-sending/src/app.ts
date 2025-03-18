@@ -51,15 +51,10 @@ const main = async () => {
     //     }
     // })
 
-
-    const prismaLogs = await prisma.logModel.findMany({
-        where: {
-            level: 'MEDIUM'
-        }
-    })
-
-    console.log(prismaLogs)
-
-
+    // const prismaLogs = await prisma.logModel.findMany({
+    //     where: {
+    //         level: 'MEDIUM'
+    //     }
+    // })
 
 })()

@@ -1,7 +1,7 @@
 import { CronService } from './cron/cron-service';
 import { CheckService, SuccessCallback, ErrorCallback } from '../domain/use-cases/checks/check-service.use-case'
 import { SendEmailLogs } from '../domain/use-cases/email/send-email-logs.use-case';
-import { FileSystemDatasource, MongoLogDataSource } from '../infraestructure/datasources';
+import { FileSystemDatasource, MongoLogDataSource, PostgresLogDatasource } from '../infraestructure/datasources';
 import { LogRepositoryImpl } from '../infraestructure/repositories/log.repository';
 import { EmailService } from './email/email-service';
 //* Temporal
@@ -9,7 +9,8 @@ import { LogEntity, LogSeverity } from '../domain/entities/log.entity';
 
 const logRepository = new LogRepositoryImpl( // It is a "general way" of using a functionality, for example, hosting a log through a repository, either from file systems or from a database.
     // new FileSystemDatasource(),
-    new MongoLogDataSource(),
+    // new MongoLogDataSource(),
+    new PostgresLogDatasource(),
 );
 
 const emailService = new EmailService();
@@ -48,5 +49,8 @@ export class Server {
         // } as LogEntity; // This should be an instance of LogEntity
 
         // await mongoLogRepository.saveLog(logSample)
+
+        //* Get Logs
+        await logRepository.getLogs(LogSeverity.low);
     }
 }
