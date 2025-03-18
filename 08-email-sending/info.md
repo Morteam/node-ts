@@ -38,3 +38,13 @@ Allows connect Node + Mongo DB
 #### Postgres SQL
 
 * In desktop, use the Table plus app
+
+#### Prisma ORM
+Allows connect Node + PostgresSQL, another options is TypeORM
+
+Run docker and your admin DB (Table plus, example)
+* Steps:
+    * Install Prisma like Dev Dependency ``npm i prisma -D``
+    * Run ``npx prisma init --datasource-provider PostgreSQL``
+    * Create your Schema in schema.prisma
+    * Run ``npx prisma migrate dev --name init``
