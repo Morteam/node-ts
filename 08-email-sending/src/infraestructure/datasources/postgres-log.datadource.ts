@@ -43,6 +43,8 @@ export class PostgresLogDatasource implements LogDatasource {
             level: prismaLog.level.toLowerCase() as LogSeverity, // Type of level of our implementation with Node
         }))
 
+        console.log(logs);
+
         return logs;
     }
 

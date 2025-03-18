@@ -6,12 +6,17 @@ import { LogRepositoryImpl } from '../infraestructure/repositories/log.repositor
 import { EmailService } from './email/email-service';
 //* Temporal
 import { LogEntity, LogSeverity } from '../domain/entities/log.entity';
+import { CheckServiceMultiple } from '../domain/use-cases/checks/check-service-multiple.use-case';
 
-const logRepository = new LogRepositoryImpl( // It is a "general way" of using a functionality, for example, hosting a log through a repository, either from file systems or from a database.
-    // new FileSystemDatasource(),
-    // new MongoLogDataSource(),
-    new PostgresLogDatasource(),
-);
+// const logRepository = new LogRepositoryImpl( // It is a "general way" of using a functionality, for example, hosting a log through a repository, either from file systems or from a database.
+//     // new FileSystemDatasource(),
+//     // new MongoLogDataSource(),
+//     new PostgresLogDatasource(),
+// );
+
+const fsLogRepository = new LogRepositoryImpl(new FileSystemDatasource());
+const mongoLogRepository = new LogRepositoryImpl(new MongoLogDataSource());
+const postgresLogRepository = new LogRepositoryImpl(new PostgresLogDatasource());
 
 const emailService = new EmailService();
 
@@ -51,6 +56,11 @@ export class Server {
         // await mongoLogRepository.saveLog(logSample)
 
         //* Get Logs
-        await logRepository.getLogs(LogSeverity.low);
+        // await logRepository.getLogs(LogSeverity.low);
+
+        //* Multiple Datasources
+        // CronService.createJob('*/3 * * * * *', async () => {
+        //     console.log(`3 Seconds: google is ${await new CheckServiceMultiple([fsLogRepository, mongoLogRepository, postgresLogRepository], successCheckService, errorCheckService).execute(URL_TO_CHECK) ? 'OK' : 'down'}`)
+        // })
     }
 }
