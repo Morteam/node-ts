@@ -37,8 +37,8 @@ export class Server {
         //* Mongo
         //* use useCase (???)
         //* Get logs
-        const logsFiltered = await logRepository.getLogs(LogSeverity.medium);
-        console.log('logsFiltered', logsFiltered)
+        // const logsFiltered = await logRepository.getLogs(LogSeverity.medium);
+        // console.log('logsFiltered', logsFiltered)
 
         //* Create Log
         // const logSample = {

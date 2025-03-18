@@ -2,6 +2,7 @@ import { Server } from './presentation/server'
 
 import { envs } from './config/plugins/envs.plugin';
 import { LogModel, MongoDatabase } from './data/mongo';
+import { PrismaClient } from '@prisma/client';
 
 
 const main = async () => {
@@ -34,6 +35,30 @@ const main = async () => {
     // const data = await LogModel.find();
 
     // console.log(data)
+
+
+    /*
+        * Prisma, using Prisma Client, it's created when we run npx prisma generate
+    */
+
+    const prisma = new PrismaClient()
+    // const newLog = await prisma.logModel.create({
+    //     data: {
+    //         message: 'Sample 33',
+    //         level: 'MEDIUM',
+    //         createdAt: new Date(),
+    //         origin: 'app.ts'
+    //     }
+    // })
+
+
+    const prismaLogs = await prisma.logModel.findMany({
+        where: {
+            level: 'MEDIUM'
+        }
+    })
+
+    console.log(prismaLogs)
 
 
 
