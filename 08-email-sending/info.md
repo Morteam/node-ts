@@ -25,7 +25,7 @@ requestions:
             volumes: where the data was hosted
             ports: where we cna connect with it
 3. run ``docker --version``
-4. run ``docker compose up`` or ``docker compose up -d`` run the docker-compose.yml file
+4. run ``docker compose up`` or ``docker compose up -d`` run the docker-compose.yml file and run the DBs
 5. open Mongo DB Compass with the connection: mongodb://localhost:27017 and the user and pass of the .env
 
 *. running ``docker compose up -d``, docker download the new files and run the docker-compose.yml
@@ -48,3 +48,6 @@ Run docker and your admin DB (Table plus, example)
     * Run ``npx prisma init --datasource-provider PostgreSQL``
     * Create your Schema in schema.prisma
     * Run ``npx prisma migrate dev --name init``
+
+#### Testing
+``npm i -D jest @types/jest ts-jest supertest``
