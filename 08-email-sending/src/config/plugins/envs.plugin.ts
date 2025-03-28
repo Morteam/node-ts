@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import * as env from 'env-var';
+import * as env from 'env-var'; // Verification, sanitization, and type coercion for environment variables in Node.js
 
 export const envs = {
     PORT: env.get('PORT').required().asPortNumber(),
