@@ -1,4 +1,4 @@
-### NOC (Network Operation Center)
+### NOC (Network Operation Center) NODE + Mongo DB + PostgreSQL + Emailing + Job (Cron)
 
 
 This project use ts-node-dev instead of nodemon
