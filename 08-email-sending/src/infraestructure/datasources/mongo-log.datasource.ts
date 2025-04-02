@@ -1,5 +1,5 @@
 import { envs } from '../../config/plugins/envs.plugin';
-import { LogModel, MongoDatabase } from '../../data/mongo';
+import { LogModel, MongoDatabase } from '../../data/mongo-db';
 import { LogDatasource } from '../../domain/datasources/log.datasource';
 import { LogEntity, LogSeverity } from '../../domain/entities/log.entity';
 
