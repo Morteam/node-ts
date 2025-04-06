@@ -22,7 +22,6 @@ const emailService = new EmailService();
 
 export class Server {
     static async run() {
-
         const URL_TO_CHECK = 'http://www.google.com'
         // const URL_TO_CHECK = 'http://localhost:3000/posts' // Pseudo server run with JSON Server
 
