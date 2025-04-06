@@ -43,8 +43,6 @@ describe('check-service.use-case', () => {
 
         const wasOk = await mockCheckService.execute('https://www.google.com')
 
-        console.log(wasOk)
-
         expect(mockLogRepository.saveLog).toHaveBeenCalledTimes(1)
         expect(errorCallbackMock).toHaveBeenCalledTimes(1)
         expect(successCallbackMock).not.toHaveBeenCalled()
