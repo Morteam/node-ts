@@ -56,8 +56,6 @@ describe('Mongo Log Data source', () => {
 
         const logs = await mongoLogDSMock.getLogs(LogSeverity.high)
 
-        console.log(logs)
-
         expect(logs.length).toBe(2)
         expect(logs).toEqual([{
             level: 'high',
@@ -71,5 +69,7 @@ describe('Mongo Log Data source', () => {
             createdAt: expect.any(Date),
             origin: 'mongo-log.datasource.test.ts'
         }])
+
+        expect(logs[0].level).toBe(LogSeverity.high)
     })
 });
