@@ -1,4 +1,4 @@
-import { EmailService } from '../../../presentation/email/email-service';
+import { EmailService } from '../../../presentation/email/email-service'; // ! It's bad!!
 import { LogEntity, LogSeverity } from '../../entities/log.entity';
 import { LogRepository } from '../../repository/log.repository';
 
@@ -30,6 +30,8 @@ export class SendEmailLogs implements SendEmailLogsUseCase {
 
             return true;
         } catch(error) {
+            console.log(error)
+
             const log = new LogEntity({
                 level: LogSeverity.high,
                 message: `${error}`,
