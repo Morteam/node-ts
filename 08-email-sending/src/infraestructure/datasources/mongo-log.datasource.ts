@@ -26,6 +26,8 @@ export class MongoLogDataSource implements LogDatasource {
         //? Try catch 
         const newLog = await LogModel.create(log)
 
+        console.log('Log created ', newLog.id)
+
         await newLog.save()
     }
 
