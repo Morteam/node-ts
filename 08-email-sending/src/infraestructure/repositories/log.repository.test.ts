@@ -22,6 +22,7 @@ describe('LogRepositoryImpl', () => {
 
         expect(logRepositoryImplementation).toBeInstanceOf(LogRepositoryImpl)
         expect(dataSourceMocked.saveLog).toHaveBeenCalledTimes(1)
+        expect(dataSourceMocked.saveLog).toHaveBeenCalledWith(logMocked)
     })
 
     test('Should call the getLogs of the datasource', () => {
@@ -30,6 +31,7 @@ describe('LogRepositoryImpl', () => {
         logRepositoryImplementation.getLogs(LogSeverity.low)
 
         expect(dataSourceMocked.getLogs).toHaveBeenCalledTimes(1)
+        expect(dataSourceMocked.getLogs).toHaveBeenCalledWith(LogSeverity.low)
     })
 
     // test('Should ', () => {})
