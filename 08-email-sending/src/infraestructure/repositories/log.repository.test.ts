@@ -15,6 +15,10 @@ const logMocked = {
 
 describe('LogRepositoryImpl', () => {
 
+    beforeEach(() => {
+        jest.clearAllMocks()   
+    })
+
     test('Should call the saveLog of the datasource', () => {
         const logRepositoryImplementation = new LogRepositoryImpl(dataSourceMocked);
         
