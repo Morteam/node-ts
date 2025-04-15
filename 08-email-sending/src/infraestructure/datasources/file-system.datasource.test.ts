@@ -7,13 +7,7 @@ describe('File system datasource', () => {
 
     const logPath = path.join(__dirname, '../../../logs') // Concat the path
 
-    // const LOW_LOG_MOCKED = {
-        // level: LogSeverity.low,
-        // message: 'All logs mocked',
-        // origin: 'fs.datasource.test.ts'
-    // };
-
-    beforeEach(() => {
+    beforeAll(() => {
         fs.rmSync(logPath, { recursive: true, force: true })
     });
 
@@ -76,7 +70,7 @@ describe('File system datasource', () => {
         expect(allFileData).toContain( JSON.stringify(highLogSample) )
     })
 
-    test('Should get logs according severity: low', async () => {
+    test('Should get logs according severity', async () => {
         const lowLogSample1 = new LogEntity({
             level: LogSeverity.low,
             message: 'All logs mocked: Samp A1',
@@ -87,40 +81,11 @@ describe('File system datasource', () => {
             message: 'All logs mocked: Samp A2',
             origin: 'fs.datasource.test.ts'
         })
-
-        const fsMock = new FileSystemDatasource()
-        await fsMock.saveLog(lowLogSample1)
-        await fsMock.saveLog(lowLogSample2)
-
-        const allLowLogs = await fsMock.getLogs(LogSeverity.low)
-
-        expect(allLowLogs).toEqual([lowLogSample1, lowLogSample2])
-    })
-
-    test('Should get logs according severity: medium', async () => {
         const mediumLogSample1 = new LogEntity({
             level: LogSeverity.medium,
             message: 'Medium log mocked: Samp A1',
             origin: 'fs.datasource.test.ts'
         })
-        const mediumLogSample2 = new LogEntity({
-            level: LogSeverity.medium,
-            message: 'Medium log mocked: Samp A2',
-            origin: 'fs.datasource.test.ts'
-        })
-
-        const fsMock = new FileSystemDatasource()
-        await fsMock.saveLog(mediumLogSample1)
-        await fsMock.saveLog(mediumLogSample2)
-
-        const allMediumLogs = await fsMock.getLogs(LogSeverity.low)
-
-        expect(allMediumLogs).toEqual([mediumLogSample1, mediumLogSample2])
-
-        console.log('allMediumLogs ', allMediumLogs)
-    })
-
-    test('Should get logs according severity: high', async () => {
         const highLogSample1 = new LogEntity({
             level: LogSeverity.high,
             message: 'High log mocked: Samp A1',
@@ -133,14 +98,20 @@ describe('File system datasource', () => {
         })
 
         const fsMock = new FileSystemDatasource()
+
+        await fsMock.saveLog(lowLogSample1)
+        await fsMock.saveLog(lowLogSample2)
+        await fsMock.saveLog(mediumLogSample1)
         await fsMock.saveLog(highLogSample1)
         await fsMock.saveLog(highLogSample2)
 
-        const allHighLogs = await fsMock.getLogs(LogSeverity.low)
+        const allLogs = await fsMock.getLogs(LogSeverity.low)
+        const allMediumLogs = await fsMock.getLogs(LogSeverity.medium)
+        const allHighLogs = await fsMock.getLogs(LogSeverity.high)
 
-        expect(allHighLogs).toEqual([highLogSample1, highLogSample2])
-
-        console.log('allHighLogs ', allHighLogs)
+        expect(allLogs).toEqual(expect.arrayContaining([lowLogSample1, lowLogSample2, mediumLogSample1, highLogSample1, highLogSample2]))
+        expect(allMediumLogs).toEqual(expect.arrayContaining([mediumLogSample1]))
+        expect(allHighLogs).toEqual(expect.arrayContaining([highLogSample1, highLogSample2]))
     })
 
     // test('Should ', () => {})
