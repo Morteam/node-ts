@@ -28,6 +28,7 @@ export class PostgresLogDatasource implements LogDatasource {
 
         console.log(newLog);
     }
+
     async getLogs(severityLevel: LogSeverity): Promise<LogEntity[]> {
         const prismaLogs = await this.prismaLogModel.findMany({
             where: {
