@@ -1,20 +1,10 @@
-import http2 from 'http2' //* Using HTTP2
+import http from 'http' //* Using HTTP
 import fs from 'fs'
 
 const PORT = 8080
 
-//* Create the web server using HTTP2, for run this in local is necessary:
-//* Edit the environment variable of Window (SO) called PATH and add 'C:\Program Files\Git\usr\bin'
-//* Run this command from window powershell 'openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout server.key -out server.crt' in the terminal
-//* Continue with the steps
-//* Add the files into a keys folder in the project
-//* Called the keys in the createSecureSever options
-//* Run the project
-//* Enter https://localhost:8080/
-const myFirstWebServer = http2.createSecureServer({
-    key: fs.readFileSync('./keys/server.key'),
-    cert: fs.readFileSync('./keys/server.crt'),
-}, (req, res) => {
+//* Create the web server
+const myFirstWebServer = http.createServer((req, res) => {
     // console.log('Request ', req);
     console.log('Request ', req.url);
 
@@ -73,20 +63,13 @@ const myFirstWebServer = http2.createSecureServer({
 
         type FileTypeKey = keyof typeof FILE_DIRECTORY
 
-        try {
-            const contenType = Object.keys(FILE_DIRECTORY).find(file => urlPath.includes(`/${file}/`)) as FileTypeKey; //? Better with .endsWith
-            const contenType2 = contenType ? FILE_DIRECTORY[contenType] : 'text/html'
+        const contenType = Object.keys(FILE_DIRECTORY).find(file => urlPath.includes(`/${file}/`)) as FileTypeKey; //? Better with .endsWith
+        const contenType2 = contenType ? FILE_DIRECTORY[contenType] : 'text/html'
 
-            const file = fs.readFileSync(`./public/${urlPath}`, 'utf-8')
+        const file = fs.readFileSync(`./public/${urlPath}`, 'utf-8')
 
-        
-            res.writeHead(200, {'content-type': contenType2})
-            res.end(file)
-        } catch(error) {
-            res.writeHead(404, {'content-type': 'text/html'})
-            res.end()
-        }
-
+        res.writeHead(200, {'content-type': contenType2})
+        res.end(file)
     }
 
 
