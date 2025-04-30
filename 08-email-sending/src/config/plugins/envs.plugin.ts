@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import 'dotenv/config'; // Loading the default dotenv config
 import * as env from 'env-var'; // Verification, sanitization, and type coercion for environment variables in Node.js
 
 export const envs = {
