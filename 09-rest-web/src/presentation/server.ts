@@ -1,46 +1,31 @@
-import express from 'express'
+import express, { Router } from 'express'
 import path from 'path';
 
 
 interface ServerOptions {
     port: number,
     publicPath: string,
+    routes: Router
 }
 
 export class Server {
     private app = express()
     private readonly port: number;
     private readonly publicPath: string;
+    private readonly routes: Router;
 
-    constructor({port, publicPath}: ServerOptions) {
+    constructor({port, publicPath, routes}: ServerOptions) {
         this.port = port
         this.publicPath = publicPath
+        this.routes = routes
     }
 
     async start() {
         //* Enable public folder
         this.app.use(express.static(this.publicPath)) //-- Public refers to the folder 'public'
 
-        //* Rest: /get -- Temp
-        this.app.get('/api/todos', (req, res) => {
-            res.json([
-                {
-                    id: 1,
-                    name: 'Buy milk',
-                    date: new Date()
-                },
-                {
-                    id: 2,
-                    name: 'Buy bread',
-                    date: null
-                },
-                {
-                    id: 3,
-                    name: 'Buy cheese',
-                    date: new Date()
-                },
-            ])
-        })
+        //* Routes
+        this.app.use( this.routes )
 
         //* Fixing routes in SPA
         this.app.get('/{*splat}', async (req, res) => {
