@@ -21,6 +21,27 @@ export class Server {
         //* Enable public folder
         this.app.use(express.static(this.publicPath)) //-- Public refers to the folder 'public'
 
+        //* Rest: /get -- Temp
+        this.app.get('/api/todos', (req, res) => {
+            res.json([
+                {
+                    id: 1,
+                    name: 'Buy milk',
+                    date: new Date()
+                },
+                {
+                    id: 2,
+                    name: 'Buy bread',
+                    date: null
+                },
+                {
+                    id: 3,
+                    name: 'Buy cheese',
+                    date: new Date()
+                },
+            ])
+        })
+
         //* Fixing routes in SPA
         this.app.get('/{*splat}', async (req, res) => {
             const indexPath = path.join(__dirname, `../../${this.publicPath}/index.html`)
