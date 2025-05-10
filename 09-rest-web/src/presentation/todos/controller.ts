@@ -62,8 +62,11 @@ export class TodoController {
       res.status(400).json(`The text value is required`)
     }
 
+    const lastTodo = ARR_TODOS[ARR_TODOS.length - 1]
+    const idNewTodo = lastTodo.id + 1
+
     const newTask: Todo = {
-      id: ARR_TODOS.length + 1,
+      id: idNewTodo,
       text,
       completedAt: null
     }
@@ -137,7 +140,6 @@ export class TodoController {
 
     res.json({
       message: 'Todo removed',
-      todos: ARR_TODOS
     })  
   }
 }
