@@ -1,20 +1,26 @@
 import { Request, Response } from 'express'
 
 
-const TODOS = [
+interface Todo {
+  id: number
+  text: string
+  date: Date | null
+}
+
+const TODOS: Array<Todo> = [
   {
     id: 1,
-    name: 'Buy milk',
+    text: 'Buy milk',
     date: new Date()
   },
   {
     id: 2,
-    name: 'Buy bread',
+    text: 'Buy bread',
     date: null
   },
   {
     id: 3,
-    name: 'Buy cheese v5',
+    text: 'Buy cheese v5',
     date: new Date()
   },
 ]
@@ -42,6 +48,24 @@ export class TodoController {
       ? res.json(todoItem)
       : res.status(404).json(`The task with id ${id} does not exist`)
     return
+  }
+
+  public createTodo = (req: Request, res: Response) => {
+    const { text } = req.body
+
+    if(!text) {
+      res.status(400).json(`The text value is required`)
+    }
+
+    const newTask: Todo = {
+      id: TODOS.length + 1,
+      text,
+      date: null
+    }
+
+    TODOS.push(newTask)
+    
+    res.json(newTask)
   }
 
 }

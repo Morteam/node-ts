@@ -21,6 +21,10 @@ export class Server {
     }
 
     async start() {
+        //* Middlewares
+        this.app.use(express.json()) //-- Returns middleware that only parses json and only looks at requests where the Content-Type header matches the type option.       
+        this.app.use(express.urlencoded({ extended: true })) //-- Returns middleware that only parses urlencoded bodies and only looks at requests where the Content-Type header matches the type option (Useful with bodies with x-www-form-urlencoded)
+
         //* Enable public folder
         this.app.use(express.static(this.publicPath)) //-- Public refers to the folder 'public'
 
