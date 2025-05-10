@@ -7,7 +7,7 @@ interface Todo {
   completedAt: Date | null
 }
 
-const TODOS: Array<Todo> = [
+const ARR_TODOS: Array<Todo> = [
   {
     id: 1,
     text: 'Buy milk',
@@ -23,6 +23,11 @@ const TODOS: Array<Todo> = [
     text: 'Buy cheese v5',
     completedAt: new Date()
   },
+  {
+    id: 4,
+    text: 'Go home',
+    completedAt: new Date()
+  },
 ]
 
 export class TodoController {
@@ -31,7 +36,7 @@ export class TodoController {
   }
 
   public getTodos = (req: Request, res: Response) => {
-    res.json(TODOS)
+    res.json(ARR_TODOS)
     return
   }
 
@@ -42,7 +47,7 @@ export class TodoController {
       return
     }
 
-    const todoItem = TODOS.find(task => task.id === id)
+    const todoItem = ARR_TODOS.find(task => task.id === id)
 
     todoItem
       ? res.json(todoItem)
@@ -58,12 +63,12 @@ export class TodoController {
     }
 
     const newTask: Todo = {
-      id: TODOS.length + 1,
+      id: ARR_TODOS.length + 1,
       text,
       completedAt: null
     }
 
-    TODOS.push(newTask)
+    ARR_TODOS.push(newTask)
     
     res.json(newTask)
   }
@@ -75,7 +80,7 @@ export class TodoController {
       return
     }
 
-    const todoItem = TODOS.find(task => task.id === id)
+    const todoItem = ARR_TODOS.find(task => task.id === id)
     if(!todoItem) {
       res.status(404).json(`The task with id ${id} not found`)
       return
@@ -96,7 +101,7 @@ export class TodoController {
     // text && (todoItem.text = text)
     // date && (todoItem.date = date)
 
-    // // Other way TODOS.forEach(todo => {
+    // ARR_TODOS.forEach(todo => {
     //   if(todo.id === id) return {
     //     ...todo,
     //     ...(text && (todoItem.text = text)),
@@ -105,5 +110,34 @@ export class TodoController {
     // })
 
     res.json(todoItem)
+  }
+
+  public deleteTodoById = (req: Request, res: Response) => {
+    const id = +req.params.id
+    if(isNaN(id)) {
+      res.status(400).json(`The id is not a number`)
+      return
+    }
+
+    const todoToDelete = ARR_TODOS.find(task => task.id === id)
+    if(!todoToDelete) {
+      res.status(404).json(`The task with id ${id} not found`)
+      return
+    }
+
+    const indexTodoToDelete = ARR_TODOS.indexOf(todoToDelete)
+    ARR_TODOS.splice(indexTodoToDelete, 1)
+
+    // Other Way
+    // ARR_TODOS.forEach((todo, i) => {
+    //   if(todo.id === todoToDelete.id) {
+    //     ARR_TODOS.splice(i, 1)
+    //   }
+    // })
+
+    res.json({
+      message: 'Todo removed',
+      todos: ARR_TODOS
+    })  
   }
 }
