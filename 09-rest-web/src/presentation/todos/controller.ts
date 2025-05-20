@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { prismaClient } from '../../data'
 
 
 interface Todo {
@@ -7,47 +8,30 @@ interface Todo {
   completedAt: Date | null
 }
 
-const ARR_TODOS: Array<Todo> = [
-  {
-    id: 1,
-    text: 'Buy milk',
-    completedAt: new Date()
-  },
-  {
-    id: 2,
-    text: 'Buy bread',
-    completedAt: null
-  },
-  {
-    id: 3,
-    text: 'Buy cheese v5',
-    completedAt: new Date()
-  },
-  {
-    id: 4,
-    text: 'Go home',
-    completedAt: new Date()
-  },
-]
-
 export class TodoController {
   constructor(){
     // ID
   }
 
-  public getTodos = (req: Request, res: Response) => {
-    res.json(ARR_TODOS)
+  public getTodos = async (req: Request, res: Response) => {
+    const allTodos = await prismaClient.todo.findMany()
+
+    res.json(allTodos)
     return
   }
 
-  public getTodoById = (req: Request, res: Response) => {
+  public getTodoById = async (req: Request, res: Response) => {
     const id = +req.params.id
     if (isNaN(id)) {
       res.status(400).json(`The id is not a number`)
       return
     }
 
-    const todoItem = ARR_TODOS.find(task => task.id === id)
+    const todoItem = await prismaClient.todo.findFirst({
+      where: {
+        id
+      }
+    })
 
     todoItem
       ? res.json(todoItem)
@@ -55,35 +39,35 @@ export class TodoController {
     return
   }
 
-  public createTodo = (req: Request, res: Response) => {
+  public createTodo = async (req: Request, res: Response) => {
     const { text } = req.body
 
     if(!text) {
       res.status(400).json(`The text value is required`)
     }
 
-    const lastTodo = ARR_TODOS[ARR_TODOS.length - 1]
-    const idNewTodo = lastTodo.id + 1
-
-    const newTask: Todo = {
-      id: idNewTodo,
-      text,
-      completedAt: null
-    }
-
-    ARR_TODOS.push(newTask)
+    const newTodo = await prismaClient.todo.create({
+      data: {
+        text
+      }
+    })
     
-    res.json(newTask)
+    res.json(newTodo)
   }
 
-  public updateTodoById = (req: Request, res: Response) => {
+  public updateTodoById = async (req: Request, res: Response) => {
     const id = +req.params.id
     if(isNaN(id)) {
       res.status(400).json(`The id is not a number`)
       return
     }
 
-    const todoItem = ARR_TODOS.find(task => task.id === id)
+    const todoItem = await prismaClient.todo.findFirst({
+      where: {
+        id
+      }
+    })
+    
     if(!todoItem) {
       res.status(404).json(`The task with id ${id} not found`)
       return
@@ -91,55 +75,55 @@ export class TodoController {
 
     const { text, completedAt } = req.body
 
-    //! 🫤 ???
-    todoItem.text = text || todoItem.text
-    // TODO: Improve this
-    todoItem.completedAt = (completedAt === null || completedAt === 'null')
-      ? null
-      : completedAt
-        ? new Date(completedAt)
-        : todoItem.completedAt
-    
-    // Other way
-    // text && (todoItem.text = text)
-    // date && (todoItem.date = date)
+    const todoUpdated = await prismaClient.todo.update({
+      where: {
+        id
+      },
+      data: {
+        text,
+        completedAt: (completedAt === null || completedAt === 'null')
+          ? null
+          : completedAt
+            ? new Date(completedAt)
+            : todoItem.completedAt
+      }
+    })
 
-    // ARR_TODOS.forEach(todo => {
-    //   if(todo.id === id) return {
-    //     ...todo,
-    //     ...(text && (todoItem.text = text)),
-    //     ...(date && (todoItem.date = date))
-    //   }
-    // })
-
-    res.json(todoItem)
+    res.json(todoUpdated)
   }
 
-  public deleteTodoById = (req: Request, res: Response) => {
+  public deleteTodoById = async (req: Request, res: Response) => {
     const id = +req.params.id
     if(isNaN(id)) {
       res.status(400).json(`The id is not a number`)
       return
     }
 
-    const todoToDelete = ARR_TODOS.find(task => task.id === id)
-    if(!todoToDelete) {
+    const todoItem = await prismaClient.todo.findFirst({
+      where: {
+        id
+      }
+    })
+    
+    if(!todoItem) {
       res.status(404).json(`The task with id ${id} not found`)
       return
     }
 
-    const indexTodoToDelete = ARR_TODOS.indexOf(todoToDelete)
-    ARR_TODOS.splice(indexTodoToDelete, 1)
+    const todoDeleted = await prismaClient.todo.delete({
+      where: {
+        id
+      }
+    })
 
-    // Other Way
-    // ARR_TODOS.forEach((todo, i) => {
-    //   if(todo.id === todoToDelete.id) {
-    //     ARR_TODOS.splice(i, 1)
-    //   }
-    // })
+    if(todoDeleted) {
+      res.json({
+        message: 'Todo removed',
+        todoDeleted
+      })  
+    } else {
+      res.status(404).json(`The task with id ${id} not found`)
+    }
 
-    res.json({
-      message: 'Todo removed',
-    })  
   }
 }
