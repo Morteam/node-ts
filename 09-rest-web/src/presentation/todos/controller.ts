@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { prismaClient } from '../../data'
+import { CreateTodoDTO } from '../../domain/dtos'
 
 
 interface Todo {
@@ -40,16 +41,15 @@ export class TodoController {
   }
 
   public createTodo = async (req: Request, res: Response) => {
-    const { text } = req.body
+    const [error, createTodoDTO] = CreateTodoDTO.create(req.body)
 
-    if(!text) {
+    if(error) {
       res.status(400).json(`The text value is required`)
+      return
     }
 
     const newTodo = await prismaClient.todo.create({
-      data: {
-        text
-      }
+      data: createTodoDTO!
     })
     
     res.json(newTodo)
