@@ -1,4 +1,17 @@
 export class CreateTodoDTO {
+  /*
+    public readonly text: string in the constructor
+
+    is similar to 
+
+    public readonly text: string
+
+    constructor(text) {
+      this.text = text
+    }
+  */
+
+
   private constructor(
     public readonly text: string
   ) {

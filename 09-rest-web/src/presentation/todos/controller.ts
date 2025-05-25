@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { prismaClient } from '../../data'
-import { CreateTodoDTO } from '../../domain/dtos'
+import { CreateTodoDTO, UpdateTodoDTO } from '../../domain/dtos'
 
 
 interface Todo {
@@ -57,6 +57,7 @@ export class TodoController {
 
   public updateTodoById = async (req: Request, res: Response) => {
     const id = +req.params.id
+  
     if(isNaN(id)) {
       res.status(400).json(`The id is not a number`)
       return
@@ -73,20 +74,20 @@ export class TodoController {
       return
     }
 
-    const { text, completedAt } = req.body
+    const [error, updateTodoDTO] = UpdateTodoDTO.create({
+      ...req.body,
+      id
+    })
+
+    if(error) {
+      res.status(400).json(error)
+    }
 
     const todoUpdated = await prismaClient.todo.update({
       where: {
         id
       },
-      data: {
-        text,
-        completedAt: (completedAt === null || completedAt === 'null')
-          ? null
-          : completedAt
-            ? new Date(completedAt)
-            : todoItem.completedAt
-      }
+      data: updateTodoDTO!.values
     })
 
     res.json(todoUpdated)
