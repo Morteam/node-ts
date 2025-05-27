@@ -137,4 +137,5 @@ dist
 # keys
 keys/
 
+dist/
 postgres/
