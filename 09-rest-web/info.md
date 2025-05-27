@@ -23,3 +23,11 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
   * Optional: Run `npx prisma generate` to generate the prisma client, you can then starting querying your DB (more info: https://pris.ly/d/getting-started)
 * Define your Model in the schema.prisma and the migrate it to the DB running `npx prisma migrate dev --name init`
   * or if you have a DB running you can download it `npx prisma db pull`
+
+
+
+DB:
+* supabase.com
+
+FE:
+* render.com
