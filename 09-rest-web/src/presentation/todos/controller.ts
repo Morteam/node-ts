@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { prismaClientInstance } from '../../data/postgres'
+import { prisma } from '../../data'
 import { CreateTodoDTO, UpdateTodoDTO } from '../../domain/dtos'
 
 
@@ -15,7 +15,7 @@ export class TodoController {
   }
 
   public getTodos = async (req: Request, res: Response) => {
-    const allTodos = await prismaClientInstance.todo.findMany()
+    const allTodos = await prisma.todo.findMany()
 
     res.json(allTodos)
     return
@@ -28,7 +28,7 @@ export class TodoController {
       return
     }
 
-    const todoItem = await prismaClientInstance.todo.findFirst({
+    const todoItem = await prisma.todo.findFirst({
       where: {
         id
       }
@@ -48,7 +48,7 @@ export class TodoController {
       return
     }
 
-    const newTodo = await prismaClientInstance.todo.create({
+    const newTodo = await prisma.todo.create({
       data: createTodoDTO!
     })
     
@@ -63,7 +63,7 @@ export class TodoController {
       return
     }
 
-    const todoItem = await prismaClientInstance.todo.findFirst({
+    const todoItem = await prisma.todo.findFirst({
       where: {
         id
       }
@@ -83,7 +83,7 @@ export class TodoController {
       res.status(400).json(error)
     }
 
-    const todoUpdated = await prismaClientInstance.todo.update({
+    const todoUpdated = await prisma.todo.update({
       where: {
         id
       },
@@ -100,7 +100,7 @@ export class TodoController {
       return
     }
 
-    const todoItem = await prismaClientInstance.todo.findFirst({
+    const todoItem = await prisma.todo.findFirst({
       where: {
         id
       }
@@ -111,7 +111,7 @@ export class TodoController {
       return
     }
 
-    const todoDeleted = await prismaClientInstance.todo.delete({
+    const todoDeleted = await prisma.todo.delete({
       where: {
         id
       }
