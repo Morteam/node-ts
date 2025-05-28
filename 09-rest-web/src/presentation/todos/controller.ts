@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { prismaClient } from '../../data/postgres'
+import { prismaClient } from '../../data/postgres/index'
 import { CreateTodoDTO, UpdateTodoDTO } from '../../domain/dtos'
 
 
