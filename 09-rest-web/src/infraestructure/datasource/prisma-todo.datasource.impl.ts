@@ -2,7 +2,7 @@ import { prisma } from '../../data'; // In this case is prisma
 import { CreateTodoDTO, TodoDatasource, TodoEntity, UpdateTodoDTO } from '../../domain'
 
 // PRISMA
-export class TodoDatasourceImple implements TodoDatasource {
+export class PrismaTodoDatasourceImpl implements TodoDatasource {
   async create(createTodoDTO: CreateTodoDTO): Promise<TodoEntity> {
     const newTodo = await prisma.todo.create({
       data: createTodoDTO!
