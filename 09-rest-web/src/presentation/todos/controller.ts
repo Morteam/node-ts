@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
-import { prisma } from '../../data'
 import { CreateTodoDTO, UpdateTodoDTO } from '../../domain/dtos'
-import { TodoRepository } from '../../domain'
+import { CreateTodoUseCase, DeleteTodoUseCase, GetTodosUseCase, GetTodoUseCase, TodoRepository, UpdateTodoUseCase } from '../../domain'
 
 
 interface Todo {
@@ -15,11 +14,11 @@ export class TodoController {
     private readonly todoRepository: TodoRepository
   ){}
 
-  public getTodos = async (req: Request, res: Response) => {
-    const allTodos = await this.todoRepository.getAll()
-
-    res.json(allTodos)
-    return
+  public getTodos = (req: Request, res: Response) => {
+    new GetTodosUseCase(this.todoRepository)
+      .execute()
+      .then(todos => res.json(todos))
+      .catch(error => res.status(400).json({error}))
   }
 
   public getTodoById = async (req: Request, res: Response) => {
@@ -30,13 +29,10 @@ export class TodoController {
       return
     }
 
-    try {
-      const todoItem = await this.todoRepository.getById(id)
-
-      res.json(todoItem)
-    } catch(error) {
-      res.status(404).json(`The task with id ${id} does not exist`)
-    }
+    new GetTodoUseCase(this.todoRepository)
+      .execute(id)
+      .then(todoItem => res.json(todoItem))
+      .catch(error => res.status(400).json({error}))
   }
 
   public createTodo = async (req: Request, res: Response) => {
@@ -47,9 +43,10 @@ export class TodoController {
       return
     }
 
-    const newTodo = await this.todoRepository.create(createTodoDTO!)
-    
-    res.json(newTodo)
+    new CreateTodoUseCase(this.todoRepository)
+      .execute(createTodoDTO!)
+      .then(todoItem => res.json(todoItem))
+      .catch(error => res.status(400).json({error}))
   }
 
   public updateTodoById = async (req: Request, res: Response) => {
@@ -69,12 +66,10 @@ export class TodoController {
       res.status(400).json(error)
     }
 
-    try {
-      const todoUpdated = await this.todoRepository.updateById(updateTodoDTO!)
-      res.json(todoUpdated)
-    } catch(error) {
-      res.status(404).json(`The task with id ${id} not found`)
-    }
+    new UpdateTodoUseCase(this.todoRepository)
+      .execute(updateTodoDTO!)
+      .then(todoItem => res.json(todoItem))
+      .catch(error => res.status(400).json({error}))
 
   }
 
@@ -84,17 +79,14 @@ export class TodoController {
       res.status(400).json(`The id is not a number`)
       return
     }
-  
-    try {
-      const todoDeleted = await this.todoRepository.deleteById(id)
 
-      res.json({
+    new DeleteTodoUseCase(this.todoRepository)
+      .execute(id)
+      .then(todoItem => res.json({
         message: 'Todo removed :)',
-        todoDeleted
-      })  
-    } catch(error) {
-      res.status(404).json(`The task with id ${id} not found`)
-    }
+        todoItem
+      }))
+      .catch(error => res.status(400).json({error}))
 
   }
 }
