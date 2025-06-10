@@ -1,5 +1,6 @@
 import express, { Router } from 'express'
 import path from 'path';
+import compression from 'compression'
 
 
 interface ServerOptions {
@@ -24,6 +25,7 @@ export class Server {
         //* Middlewares
         this.app.use(express.json()) //-- Returns middleware that only parses json and only looks at requests where the Content-Type header matches the type option.       
         this.app.use(express.urlencoded({ extended: true })) //-- Returns middleware that only parses urlencoded bodies and only looks at requests where the Content-Type header matches the type option (Useful with bodies with x-www-form-urlencoded)
+        this.app.use(compression()) //-- Returns the compression middleware using the given options. The middleware will attempt to compress response bodies for all request that traverse through the middleware, based on the given options.
 
         //* Enable public folder
         this.app.use(express.static(this.publicPath)) //-- Public refers to the folder 'public'
