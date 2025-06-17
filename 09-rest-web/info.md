@@ -25,6 +25,25 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
   * or if you have a DB running you can download it `npx prisma db pull`
 
 
+### Testing
+* `npm i -D jest @types/jest ts-jest supertest`
+* Create a jest config file `npx jest --init` and set up it
+* jest.config.ts:
+  * Set the prop `preset: "ts-jest"`
+  * Set the prop `testEnvironment: "jest-environment-node"`
+  * Set the prop `setupFiles: [ "<rootDir>/setupTests.ts" ]` and create in the root the file setupTests.ts
+* test.config.ts
+  * Set the prop `exclude: ["node_modules", "dist", "src/**/*.test.ts]`
+  * Set the prop `include: ["node_modules", "dist", "src/**/*.test.ts]`
+* package.json:
+  * create scripts:
+    ``
+      "test": "jest",
+      "test:w": "jest --watch",
+      "test:cv": "jest --coverage"
+    ``
+
+
 
 DB:
 * supabase.com
