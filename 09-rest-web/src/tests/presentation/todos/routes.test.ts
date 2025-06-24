@@ -31,6 +31,7 @@ describe('Todos routing testing', () => {
   }
 
   test('Should return todos api/todos', async () => {
+    // Force the creation of data from Prisma (Use it just for testing)
     await prisma.todo.createMany({
       data: [MOCKED_TODO_1, MOCKED_TODO_2]
     })
@@ -46,6 +47,7 @@ describe('Todos routing testing', () => {
   })
 
   test('Should return a todo api/todos/:id', async () => {
+    // Force the creation of data from Prisma (Use it just for testing)
     const todo = await prisma.todo.create({
       data: MOCKED_TODO_3
     })
@@ -60,7 +62,6 @@ describe('Todos routing testing', () => {
       completedAt: null
     })
   })
-
   
   test('Should not return a 404 not found in api/todos/:id when the todo does not exist', async () => {
     const FAKE_ID = 99999999999
@@ -75,6 +76,28 @@ describe('Todos routing testing', () => {
         name: 'PrismaClientUnknownRequestError'
       }
     })
+  })
+
+  test('Should return a new todo api/todos', async () => {
+    const { body } = await request(testServer.getApp)
+      .post(BASE_ENDPOINT)
+      .send(MOCKED_TODO_3)
+      .expect(201)
+
+    expect(body).toEqual({
+      id: expect.any(Number),
+      text: MOCKED_TODO_3.text,
+      completedAt: null
+    })
+  })
+
+  test('Should return an error api/todos if there is not a text', async () => {
+    const { body } = await request(testServer.getApp)
+      .post(BASE_ENDPOINT)
+      .send({})
+      .expect(400)
+
+    expect(body).toBe('The text value is required')
   })
 
 })

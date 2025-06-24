@@ -45,7 +45,7 @@ export class TodoController {
 
     new CreateTodoUseCase(this.todoRepository)
       .execute(createTodoDTO!)
-      .then(todoItem => res.json(todoItem))
+      .then(todoItem => res.status(201).json(todoItem))
       .catch(error => res.status(400).json({error}))
   }
 
