@@ -42,6 +42,10 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
       "test:w": "jest --watch",
       "test:cv": "jest --coverage"
     ``
+* If you're using Prisma for DB consider use dotenv-cli `npm i -D dotenv-cli`
+  * Then create the command in the Package.json `"prisma:generate-migration:test": "dotenv -e .env.test -- npx prisma migrate dev --name init"`
+  * Then create the command in the Package.json `"migrate:postgres": "dotenv -e .env.sample -- npx prisma migrate deploy"`
+  * Run them before of running testing (With the same Order)
 
 
 

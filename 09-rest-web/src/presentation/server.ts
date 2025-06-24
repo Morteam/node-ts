@@ -10,7 +10,8 @@ interface ServerOptions {
 }
 
 export class Server {
-    private app = express()
+    private readonly app = express()
+    private serverListener?: any;
     private readonly port: number;
     private readonly publicPath: string;
     private readonly routes: Router;
@@ -19,6 +20,10 @@ export class Server {
         this.port = port
         this.publicPath = publicPath
         this.routes = routes
+    }
+
+    get getApp() {
+        return this.app;
     }
 
     async start() {
@@ -41,7 +46,7 @@ export class Server {
         })
 
         //* Listening port
-        this.app.listen(this.port, () => {
+        this.serverListener = this.app.listen(this.port, () => {
             console.log(`Listening in port ${this.port}`)
         })
 
@@ -49,5 +54,9 @@ export class Server {
             port: this.port,
             publicPath: this.publicPath
         })
+    }
+
+    close() {
+        this.serverListener?.close()
     }
 }
