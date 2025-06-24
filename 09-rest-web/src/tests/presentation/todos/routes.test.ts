@@ -35,8 +35,8 @@ describe('Todos routing testing', () => {
 
     expect(body).toBeInstanceOf(Array)
     expect(body.length).toBe(2)
-    expect(body[0]).toBe(MOCKED_TODO_1)
-    expect(body[1]).toBe(MOCKED_TODO_2)
+    expect(body[0].text).toBe(MOCKED_TODO_1.text)
+    expect(body[1].text).toBe(MOCKED_TODO_2.text)
 
   })
 
