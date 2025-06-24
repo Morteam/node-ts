@@ -50,14 +50,30 @@ describe('Todos routing testing', () => {
       data: MOCKED_TODO_3
     })
 
-    const specificTodo = await request(testServer.getApp)
+    const { body } = await request(testServer.getApp)
       .get(`${BASE_ENDPOINT}/${todo.id}`)
       .expect(200)
 
-    expect(specificTodo.body).toEqual({
+    expect(body).toEqual({
       id: todo.id,
       text: MOCKED_TODO_3.text,
       completedAt: null
+    })
+  })
+
+  
+  test('Should not return a 404 not found in api/todos/:id when the todo does not exist', async () => {
+    const FAKE_ID = 99999999999
+
+    const { body } = await request(testServer.getApp)
+      .get(`${BASE_ENDPOINT}/${FAKE_ID}`)
+      .expect(404)
+
+    expect(body).toEqual({
+      error: {
+        clientVersion: expect.any(String),
+        name: 'PrismaClientUnknownRequestError'
+      }
     })
   })
 

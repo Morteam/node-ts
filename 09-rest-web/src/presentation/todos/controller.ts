@@ -32,7 +32,7 @@ export class TodoController {
     new GetTodoUseCase(this.todoRepository)
       .execute(id)
       .then(todoItem => res.json(todoItem))
-      .catch(error => res.status(400).json({error}))
+      .catch(error => res.status(404).json({error}))
   }
 
   public createTodo = async (req: Request, res: Response) => {
