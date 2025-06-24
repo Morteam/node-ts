@@ -94,6 +94,17 @@ describe('Todos routing testing', () => {
   test('Should return an error api/todos if there is not a text', async () => {
     const { body } = await request(testServer.getApp)
       .post(BASE_ENDPOINT)
+      .send({
+        text: ''
+      })
+      .expect(400)
+
+    expect(body).toBe('The text value is required')
+  })
+
+  test('Should return an error api/todos if the text is empty', async () => {
+    const { body } = await request(testServer.getApp)
+      .post(BASE_ENDPOINT)
       .send({})
       .expect(400)
 
