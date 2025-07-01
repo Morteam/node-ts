@@ -206,4 +206,35 @@ describe('Todos routing testing', () => {
     })
   })
 
+  test('Should delete a todo api/todos/:id', async () => {
+    const todo = await prisma.todo.create({
+      data: MOCKED_TODO_3
+    })
+
+    const { body } = await request(testServer.getApp)
+      .delete(`${BASE_ENDPOINT}/${todo.id}`)
+      .expect(200)
+
+    console.log(body)
+
+    expect(body.todoItem).toEqual({
+      id: expect.any(Number),
+      text: MOCKED_TODO_3.text,
+      completedAt: null
+    })
+  })
+
+  test('Should return 404 if todo does not exist api/todos/:id', async () => {
+    const { body } = await request(testServer.getApp)
+      .delete(`${BASE_ENDPOINT}/${MOCK_FAKE_ID}`)
+      .expect(400)
+
+    expect(body).toEqual({
+      error: {
+        clientVersion: expect.any(String),
+        name: 'PrismaClientUnknownRequestError'
+      }
+    })
+  })
+
 })
