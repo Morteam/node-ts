@@ -1,5 +1,5 @@
 import { prisma } from '../../data'; // In this case is prisma
-import { CreateTodoDTO, TodoDatasource, TodoEntity, UpdateTodoDTO } from '../../domain'
+import { CreateTodoDTO, CustomError, TodoDatasource, TodoEntity, UpdateTodoDTO } from '../../domain'
 
 // PRISMA
 export class PrismaTodoDatasourceImpl implements TodoDatasource {
@@ -24,7 +24,7 @@ export class PrismaTodoDatasourceImpl implements TodoDatasource {
       }
     })
 
-    if(!todoItem) throw `The task with id ${id} does not exist`
+    if(!todoItem) throw new CustomError(`The task with id ${id} does not exist`, 404)
 
     return TodoEntity.mapFromObject(todoItem)
   }
