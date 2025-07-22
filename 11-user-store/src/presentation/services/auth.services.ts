@@ -1,5 +1,5 @@
 import { UserModel } from '../../data';
-import { CustomError, RegisterUserDTO } from '../../domain';
+import { CustomError, RegisterUserDTO, UserEntity } from '../../domain';
 
 export class AuthService {
   constructor(){}
@@ -11,7 +11,11 @@ export class AuthService {
 
     try {
       const user = new UserModel(registerUserDTO)
-      await user.save(); 
+      await user.save();
+
+      // TODO: review it
+      const userEntity = UserEntity.fromObject(user)
+      const { pass, ...restUSer } = userEntity.props;
 
       // Encrypt the pass
 
@@ -19,6 +23,7 @@ export class AuthService {
 
       // Confirm with emai
 
+      return { user: restUSer, token: 'ABC'};
       return user;
     } catch(error) {
       throw CustomError.internalServer(`${error}`)

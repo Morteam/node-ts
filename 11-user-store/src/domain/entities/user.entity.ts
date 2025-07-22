@@ -16,6 +16,8 @@ export class UserEntity {
   static fromObject(object: {[key:string]: any}) {
     const {id, _id, name, email, emailValidated, pass, role, img} = object
 
+    console.log('obj ', object)
+
     if(!id && !_id) {
       throw CustomError.badRequest('The Id is required, It is missing')
     }
@@ -40,9 +42,9 @@ export class UserEntity {
       throw CustomError.badRequest('The Id role required, It is missing')
     }
 
-    if(!img) {
-      throw CustomError.badRequest('The Id img required, It is missing')
-    }
+    // if(!img) {
+    //   throw CustomError.badRequest('The Id img required, It is missing')
+    // }
 
     const userEntityParams = {
       id: id || _id,

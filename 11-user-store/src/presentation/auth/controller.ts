@@ -8,6 +8,14 @@ export class AuthController {
     public readonly authService: AuthService
   ){}
 
+  private handleError = (error: unknown, res: Response) => {
+    if( error instanceof CustomError) {
+      return res.status(error.statusCode).json({error: error.message})
+    }
+
+    return res.status(500).json({error: 'Internal server error'})
+  };
+
   register = async (req: Request, res: Response) => {
     const [error, registerUser] = RegisterUserDTO.create(req.body);
 
@@ -15,9 +23,7 @@ export class AuthController {
 
     await this.authService.registerUser(registerUser!)
       .then(user => res.status(201).json(user))
-      .catch()
-
-      return 'All good'
+      .catch(error => this.handleError(error, res))
   }
 
   login = (req: Request, res: Response) => {
