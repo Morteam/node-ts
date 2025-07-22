@@ -1,6 +1,6 @@
 import { Response, Request } from 'express'
 
-import { RegisterUserDTO } from '../../domain';
+import { CustomError, RegisterUserDTO } from '../../domain';
 import { AuthService } from '../services';
 
 export class AuthController {
@@ -9,19 +9,15 @@ export class AuthController {
   ){}
 
   register = async (req: Request, res: Response) => {
-    //? I moved the DTO to the Service, review it
+    const [error, registerUser] = RegisterUserDTO.create(req.body);
 
-    await this.authService.registerUser(req.body)
+    if (error) throw CustomError.badRequest(error)
+
+    await this.authService.registerUser(registerUser!)
       .then(user => res.status(201).json(user))
       .catch()
 
-    // temp
-
-    // const [error, registerUser] = RegisterUserDTO.create(req.body);
-
-    // if(error) return res.status(400).json({error})
-
-    // res.status(201).json(registerUser)
+      return 'All good'
   }
 
   login = (req: Request, res: Response) => {
