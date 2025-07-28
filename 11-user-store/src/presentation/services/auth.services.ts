@@ -14,8 +14,8 @@ export class AuthService {
       await user.save();
 
       // TODO: review it
-      const userEntity = UserEntity.fromObject(user)
-      const { pass, ...restUSer } = userEntity.props;
+      const userEntity = UserEntity.fromObject(user).props
+      const { pass, ...restUSer } = userEntity;
 
       // Encrypt the pass
 
@@ -24,7 +24,6 @@ export class AuthService {
       // Confirm with emai
 
       return { user: restUSer, token: 'ABC'};
-      return user;
     } catch(error) {
       throw CustomError.internalServer(`${error}`)
     }
