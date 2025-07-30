@@ -16,8 +16,6 @@ export class UserEntity {
   static fromObject(object: {[key:string]: any}) {
     const {id, _id, name, email, emailValidated, pass, role, img} = object
 
-    console.log('obj ', object)
-
     if(!id && !_id) {
       throw CustomError.badRequest('The Id is required, It is missing')
     }
