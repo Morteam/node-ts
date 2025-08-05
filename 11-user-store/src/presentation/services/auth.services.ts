@@ -1,5 +1,5 @@
-import { bcryptAdapter } from '../../adapters';
 import { UserModel } from '../../data';
+import { bcryptAdapter, JWTAdapter } from '../../adapters';
 import { CustomError, RegisterUserDTO, LoginUserDTO, UserEntity } from '../../domain';
 
 export class AuthService {
@@ -24,10 +24,12 @@ export class AuthService {
       // Encrypt the pass
 
       // JWT -- auth user --
+      const token = await JWTAdapter.generateToken({ id: user.id })
+      if (!token) throw CustomError.internalServer('Error while creating a token')
 
       // Confirm with emai
 
-      return { user: restUser, token: 'ABC'};
+      return { user: restUser, token};
     } catch(error) {
       throw CustomError.internalServer(`${error}`)
     }
@@ -45,10 +47,13 @@ export class AuthService {
 
       const userEntity = UserEntity.fromObject(user).props
       const { pass, ...restUser } = userEntity;
+
+      const token = await JWTAdapter.generateToken({ id: user.id, email: user.email })
+      if (!token) throw CustomError.internalServer('Error while creating a token')
   
       return {
         user: restUser,
-        token: 'ABC'
+        token
       }
     } catch(error) {
      throw CustomError.internalServer(`${error}`)
