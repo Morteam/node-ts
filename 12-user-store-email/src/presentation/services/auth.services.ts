@@ -48,7 +48,7 @@ export class AuthService {
       const userEntity = UserEntity.fromObject(user).props
       const { pass, ...restUser } = userEntity;
 
-      const token = await JWTAdapter.generateToken({ id: user.id, email: user.email })
+      const token = await JWTAdapter.generateToken({ id: user.id })
       if (!token) throw CustomError.internalServer('Error while creating a token')
   
       return {
