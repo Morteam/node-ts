@@ -40,7 +40,7 @@ export class AuthController {
     const { token } = req.params;
 
     await this.authService.validateEmail(token)
-      .then(user => res.status(200).json('Email validated'))
+      .then(user => res.status(200).json('Email was validated properly'))
       .catch(error => this.handleError(error, res))
   }
 }
