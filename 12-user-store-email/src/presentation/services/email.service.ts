@@ -34,6 +34,8 @@ export class EmailService {
 
             return true;
         } catch(error) {
+            console.debug('error ', error)
+
             return false;
         }
     }
