@@ -10,6 +10,7 @@ export class CategoryRoutes {
     const categoryController = new CategoryController(categoryService)
 
     router.get('/', categoryController.getCategories)
+    router.post('/', categoryController.createCategory)
 
     return router
   }
