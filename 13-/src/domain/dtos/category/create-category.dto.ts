@@ -5,7 +5,7 @@ export class CreateCategoryDTO {
   ){}
 
   static create( object: {[key:string]: any} ): [string?, CreateCategoryDTO?] {
-    const { name, available } = object;
+    const { name, available = false } = object;
     let availableBoolean = available;
 
     if(!name) return ['Missing Name']
