@@ -12,7 +12,7 @@ export class CategoryRoutes {
 
     router.get('/', categoryController.getCategories)
     router.post('/',
-      AuthMiddleware.validateJWT,
+      [ AuthMiddleware.validateJWT ],
       categoryController.createCategory
     )
 
