@@ -16,9 +16,9 @@ export class CategoryController {
   };
 
   getCategories = async (req: Request, res: Response) => {
-    await this.categoryService.getCategories()
-
-    return res.status(200).json({ text: 'Gotten' })
+    this.categoryService.getCategories()
+      .then(categories => res.status(200).json(categories))
+      .catch(error => this.handleError(error, res))
   }
 
   createCategory = async (req: Request, res: Response) => {

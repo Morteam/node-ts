@@ -5,7 +5,20 @@ export class CategoryService {
   constructor(){}
 
   public async getCategories() {
-    console.log('Getting...')
+    try {
+      const categories = await CategoryModel.find()
+      if(!categories || categories.length < 0) throw CustomError.notFound('No categories')
+  
+      const categoriesMap = categories.map(category => ({
+        id: category._id,
+        name: category.name,
+        available: category.available,
+      }))
+
+      return categoriesMap;
+    } catch(error) {
+      throw CustomError.internalServer('Internal server error')
+    }
   }
 
   public async createCategory(createCategoryDTO: CreateCategoryDTO, user: UserEntity) {
