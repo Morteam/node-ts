@@ -12,8 +12,8 @@ export class CategoryService {
       const [total, categories] = await Promise.all([
         CategoryModel.countDocuments(),
         CategoryModel.find()
-        .skip((page - 1) * limit)
-        .limit(limit)
+          .skip((page - 1) * limit)
+          .limit(limit)
       ])
 
       // Like to do this

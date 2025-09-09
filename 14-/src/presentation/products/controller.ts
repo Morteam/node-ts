@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { CustomError, PaginationDTO } from '../../domain';
+import { CustomError, CreateProductDTO, PaginationDTO } from '../../domain';
 import { ProductService } from '../services';
 
 export class ProductController {
@@ -16,17 +16,23 @@ export class ProductController {
   };
 
   getProducts = async (req: Request, res: Response) => {
-    console.log('Getting products...');
+    const { page = 1, limit = 10 } = req.query;
 
-    this.productService.getProducts()
+    const [error, paginationDTO] = PaginationDTO.create(+page, +limit)
+
+    if (error) return res.status(400).json({error})
+
+    this.productService.getProducts(paginationDTO!)
       .then(products => res.status(200).json(products))
       .catch(error => this.handleError(error, res))
   }
 
   createProduct = async (req: Request, res: Response) => {
-    console.log('Creating product...');
+    const [error, createProductDTO] = CreateProductDTO.create(req.body)
 
-    this.productService.createProduct()
+    if (error) return res.status(400).json({error})
+    
+    this.productService.createProduct(createProductDTO!)
       .then( product => res.status(201).json(product) )
       .catch( error => this.handleError(error, res) )
   }

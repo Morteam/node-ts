@@ -29,7 +29,7 @@ export class CategoryController {
   createCategory = async (req: Request, res: Response) => {
     const [error, createCategoryDTO] = CreateCategoryDTO.create(req.body)
 
-    if (error) res.status(400).json({error})
+    if (error) return res.status(400).json({error})
 
     this.categoryService.createCategory(createCategoryDTO!, req.body.user)
       .then( category => res.status(201).json(category) )
