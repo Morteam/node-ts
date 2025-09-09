@@ -1,3 +1,5 @@
+import { Validators } from '../../../config/validators';
+
 export class CreateProductDTO {
   private constructor(
     public readonly name: string,
@@ -13,7 +15,9 @@ export class CreateProductDTO {
 
     if( !name ) return ['Name is required'];
     if( !user ) return ['User is required'];
-    if( !category ) return ['Category is required'];
+    if( !Validators.isMongoId(user) ) return ['Invalid user id']
+    if( !Validators.isMongoId(category) ) return ['Invalid category id']
+    
 
     return [undefined, new CreateProductDTO(name, !!available, price, description, user, category)];
   }

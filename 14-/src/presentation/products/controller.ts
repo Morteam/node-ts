@@ -28,7 +28,10 @@ export class ProductController {
   }
 
   createProduct = async (req: Request, res: Response) => {
-    const [error, createProductDTO] = CreateProductDTO.create(req.body)
+    const [error, createProductDTO] = CreateProductDTO.create({
+      ...req.body,
+      user: req.body.user.props.id // TODO: review props why??
+    })
 
     if (error) return res.status(400).json({error})
     
