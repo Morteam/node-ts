@@ -15,7 +15,8 @@ export class ProductService {
         ProductModel.find()
           .skip((page - 1) * limit)
           .limit(limit)
-          // TODO: Populate
+          .populate('user', 'name email emailVerified') //* Get user data of user model according to the fields of 2nd param
+          .populate('category')
       ])
 
       return  {
