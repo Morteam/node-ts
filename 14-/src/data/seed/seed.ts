@@ -34,7 +34,7 @@ async function main () {
     seedData.categories.map(category => {
       return {
         ...category,
-        user: users[randomBetween0andX(4)]._id
+        user: users[randomBetween0andX(users.length - 1)]._id
       }
     })
   )
@@ -44,8 +44,8 @@ async function main () {
     seedData.products.map(product => {
       return {
         ...product,
-        category: categories[21]._id,
-        user: users[randomBetween0andX(4)]._id
+        category: categories[categories.length - 1]._id,
+        user: users[randomBetween0andX(users.length - 1)]._id
       }
     })
   )
