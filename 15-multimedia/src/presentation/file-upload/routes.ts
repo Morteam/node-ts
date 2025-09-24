@@ -7,8 +7,8 @@ export class FileUploadRoutes {
 
     const fileUploadController = new FileUploadController()
 
-    router.use('/single/:type', fileUploadController.uploadFile)
-    router.use('/multiple/:type', fileUploadController.uploadMultipleFiles)
+    router.post('/single/:type', fileUploadController.uploadFile)
+    router.post('/multiple/:type', fileUploadController.uploadMultipleFiles)
 
     return router
   }

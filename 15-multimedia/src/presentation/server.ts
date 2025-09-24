@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import path from 'path';
+import fileUpload from 'express-fileupload'
 
 interface Options {
   port: number;
@@ -22,15 +23,15 @@ export class Server {
     this.publicPath = public_path;
     this.routes = routes;
   }
-
-  
   
   async start() {
     
-
     //* Middlewares
     this.app.use( express.json() ); // raw
     this.app.use( express.urlencoded({ extended: true }) ); // x-www-form-urlencoded
+    this.app.use(fileUpload({ // File upload with 'express-fileupload' //? Consider get this middlewares like DI of Server
+      limits: { fileSize: 0 }
+    }))
 
     //* Public Folder
     this.app.use( express.static( this.publicPath ) );
