@@ -12,8 +12,9 @@ export class FileUploadRoutes {
     const fileUploadService = new FileUploadService(uuid)
     const fileUploadController = new FileUploadController(fileUploadService)
 
-    router.post('/single/:type', [ FileUploadMiddleware.containFiles ], fileUploadController.uploadFile)
-    router.post('/multiple/:type', [ FileUploadMiddleware.containFiles ], fileUploadController.uploadMultipleFiles)
+    router.use(FileUploadMiddleware.containFiles)
+    router.post('/single/:type', fileUploadController.uploadFile)
+    router.post('/multiple/:type', fileUploadController.uploadMultipleFiles)
 
     return router
   }
