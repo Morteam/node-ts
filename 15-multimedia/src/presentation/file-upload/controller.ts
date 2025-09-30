@@ -30,7 +30,7 @@ export class FileUploadController {
 
     const file = req.files.file;
 
-    this.fileUploadService.uploadSingle(file as UploadedFile, 'uploads')
+    this.fileUploadService.uploadSingle(file as UploadedFile, `uploads/${type}`)
       .then(uploaded => res.json(uploaded))
       .catch(error => this.handleError(error, res) )
   }
