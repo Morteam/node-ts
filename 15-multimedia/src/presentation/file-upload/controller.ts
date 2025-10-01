@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { CustomError } from '../../domain'
 import { FileUploadService } from '../services'
 
-//! Temp
+//! Temp dependency
 import { UploadedFile } from 'express-fileupload'
 
 export class FileUploadController {
