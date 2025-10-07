@@ -12,7 +12,12 @@ export class GithubController {
     const signature = req.header('x-hub-signature-256') ?? 'unknown'
     let message: string = '';
 
-    //?? Maybe we need a Mapper
+    //?? Maybe we need a Mapper, for avoid this
+    if(!payload) {
+      res.status(400).json({
+        error: 'Invalid Payload'
+      })
+    }
 
     switch(githubEvent) {
       case 'star':
