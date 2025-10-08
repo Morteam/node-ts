@@ -3,6 +3,7 @@ import express from 'express'
 import { envs } from './config/envs.js'
 import { GithubController } from './presentation/github/controller.js'
 import { GithubService } from './presentation/services/github.service.js'
+import { DiscordService } from './presentation/services/discord.service.js'
 
 (() => {
   main()
@@ -11,7 +12,8 @@ import { GithubService } from './presentation/services/github.service.js'
 function main() {
   const app = express()
   const githubService = new GithubService()
-  const githubController = new GithubController(githubService)
+  const discordService = new DiscordService()
+  const githubController = new GithubController(githubService, discordService)
 
   app.use( express.json() ) // Serialize JSON
 
