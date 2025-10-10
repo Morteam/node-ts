@@ -36,10 +36,6 @@ export class GithubController {
         break;
     }
 
-    // // console.log('Webhook in action ', payload, githubEvent, signature)
-    // console.log(JSON.stringify(payload))
-    console.log(message)
-
     this.discordService.notify(message)
       .then( () => res.status(202).send('Accepted') )
       .catch( () => console.error('Internal server error') )
