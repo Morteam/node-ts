@@ -139,3 +139,5 @@ keys/
 
 dist/
 postgres/
+# Local Netlify folder
+.netlify
