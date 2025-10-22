@@ -10,11 +10,19 @@ wss.on('connection', function connection(ws) {
 
   ws.on('message', function message(data) {
     console.log('WS: received: %s', data);
+
+    const payload = {
+      type: 'custom-message',
+      version: 1,
+      data: data.toString(),
+    }
+
+    ws.send(JSON.stringify(payload))
   });
 
-  setInterval(() => {
-    ws.send('Hi from the server!');
-  }, 2000)
+  // setInterval(() => {
+  //   ws.send('Hi from the server!');
+  // }, 2000)
 
   ws.on('close', () => {
     console.log('Cliente Disconnect')

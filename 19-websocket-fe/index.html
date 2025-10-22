@@ -16,12 +16,24 @@
   <script>
     console.log('Hi from the moon')
 
+    const formEl = document.querySelector('form')
+    const inputEl = document.querySelector('input[type="text"]')
+    const buttonEl = document.querySelector('button')
+    const listEl = document.querySelector('ul')
+
     const socket = new WebSocket('ws://localhost:3000')
 
     const sendMessage = message => {
       if(message.length < 0) return;
       
       socket.send(message)
+    }
+
+    const renderListItem = (message) => {
+      const liEl = document.createElement('li')
+      liEl.innerHTML = message
+
+      listEl.prepend(liEl)
     }
 
     socket.onopen = (event) => {
@@ -34,9 +46,13 @@
       console.log('FE: Disconnected')
     }
 
-    const formEl = document.querySelector('form')
-    const inputEl = document.querySelector('input[type="text"]')
-    const buttonEl = document.querySelector('button')
+    socket.onmessage = (ev) => {
+      const payload = JSON.parse(ev.data)
+
+      renderListItem(payload.data)
+
+      inputEl.value = ''
+    }
 
     formEl.addEventListener('submit', e => {
       e.preventDefault()
