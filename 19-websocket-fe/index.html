@@ -48,14 +48,13 @@
       const payload = JSON.parse(ev.data)
 
       renderListItem(payload.data)
-
-      inputEl.value = ''
     }
 
     formEl.addEventListener('submit', e => {
       e.preventDefault()
       const message = inputEl.value
       sendMessage(message)
+      inputEl.value = ''
     })
     
   </script>
