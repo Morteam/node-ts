@@ -6,7 +6,7 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>WS Status: <span></span> </h1>
+  <h1>WS Status: <span></span></h1>
   <form>
     <input type="text" placeholder="Send message">
     <button>Send</button>
@@ -14,59 +14,56 @@
   <ul id="messages"></ul>
 
   <script>
-    let socket = null
     const formEl = document.querySelector('form')
     const inputEl = document.querySelector('input[type="text"]')
     const buttonEl = document.querySelector('button')
     const listEl = document.querySelector('ul')
     const statusEl = document.querySelector('h1 span')
 
-    const sendMessage = (message) => {
-      if(message.length < 0) return;
-        
-      socket?.send(message)
-    }
-
-    const renderListItem = (message) => {
-      const liEl = document.createElement('li')
-      liEl.innerHTML = message
-
-      listEl.prepend(liEl)
-    }
-
-    formEl.addEventListener('submit', e => {
-      e.preventDefault()
-      const message = inputEl.value
-      sendMessage(message)
-
-      inputEl.value = ''
-    })
-
     function connectToWSServer() {
-      socket = new WebSocket('ws://localhost:3000')
-
+      const socket = new WebSocket('ws://localhost:3000')
+  
+      const sendMessage = message => {
+        if(message.length < 0) return;
+        
+        socket.send(message)
+      }
+  
+      const renderListItem = (message) => {
+        const liEl = document.createElement('li')
+        liEl.innerHTML = message
+  
+        listEl.prepend(liEl)
+      }
+  
       socket.onopen = (event) => {
         statusEl.innerHTML = 'FE: Connected'
       }
       
       socket.onclose = (event) => {
         statusEl.innerHTML = 'FE: Disconnected'
-        socket = null
 
         setTimeout(() => { // Clear timeout
           connectToWSServer()
         }, 2000) // Polling
       }
-
+  
       socket.onmessage = (ev) => {
         const payload = JSON.parse(ev.data)
-
+  
         renderListItem(payload.data)
       }
+  
+      formEl.addEventListener('submit', e => {
+        e.preventDefault()
+        const message = inputEl.value
+        sendMessage(message)
+        inputEl.value = ''
+      })
     }
 
     connectToWSServer()
-    
+
   </script>
 
   <p>For run correctly execute: npx http-server -o</p>
