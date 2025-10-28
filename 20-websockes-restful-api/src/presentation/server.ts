@@ -1,4 +1,4 @@
-import express, { Request, Response, Router } from 'express'
+import express, { Request, Response, Router, NextFunction } from 'express'
 import path from 'path'
 
 interface Options {
@@ -30,8 +30,11 @@ export class Server {
 
     this.app.use(this.routes)
 
-    this.app.get('*', (req: Request, res: Response) => { // SPA, only if it doesn't start with the API word
+    this.app.use((req: Request, res: Response, next: NextFunction) => {
+      // if (req.method !== 'GET') return next()
+      // if (req.path && req.path.startsWith('/api')) return next()
       const indexPath = path.join(__dirname + `../../../${this.publicPath}/index.html`)
+
       res.sendFile(indexPath)
     })
 
