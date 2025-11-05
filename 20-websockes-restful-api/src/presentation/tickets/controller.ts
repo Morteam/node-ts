@@ -14,13 +14,13 @@ export class TicketController {
   }
 
   public getLastTicketNumber = async (req: Request, res: Response) => {
-    this.ticketService.lastTicketNumber
-    res.json('getLastTicketNumber')
+    const lastTicketNumber = this.ticketService.lastTicketNumber
+    res.json(lastTicketNumber)
   }
 
   public pendingTickets = async (req: Request, res: Response) => {
-    this.ticketService.pendingTickets
-    res.json('pendingTickets')
+    const pendingTickets = this.ticketService.pendingTickets
+    res.json(pendingTickets)
   }
 
   public createTicket = async (req: Request, res: Response) => {
@@ -34,19 +34,19 @@ export class TicketController {
   public drawTicket = async (req: Request, res: Response) => {
     const { desk } = req.params
 
-    this.ticketService.drawTicket(desk)
-    res.json(desk)
+    const drawTicket = this.ticketService.drawTicket(desk)
+    res.json(drawTicket)
   }
 
   public ticketFinish = async (req: Request, res: Response) => {
     const { ticketId } = req.params
     
-    this.ticketService.onFinishedTicket(ticketId)
-    res.json(ticketId)
+    const ticket = this.ticketService.onFinishedTicket(ticketId)
+    res.json(ticket)
   }
 
   public workingOn = async (req: Request, res: Response) => {
-    this.ticketService.lastWorkingOnTickets
-    res.json('workingOn')
+    const workingOnTickets = this.ticketService.lastWorkingOnTickets
+    res.json(workingOnTickets)
   }
 }

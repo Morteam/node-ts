@@ -15,27 +15,22 @@ export class TicketService {
     { id: v4(), number: 6, createdAt: new Date(), done: false },
   ]
 
-  private readonly workingOnTickets: Ticket[] = []
+  private workingOnTickets: Ticket[] = []
 
   public get allTickets():Ticket[] {
     return this.tickets
   }
 
   public get pendingTickets():Ticket[] {  
-    console.log('pendingTickets')
-
     return this.tickets.filter(ticket => !ticket.handleAtDesk)
   }
 
   public get lastWorkingOnTickets():Ticket[] {
-    console.log('lastWorkingOnTickets')
-
+    console.log(this.workingOnTickets)
     return this.workingOnTickets.slice(0,4)
   }
 
   public get lastTicketNumber() {
-    console.log('lastTicketNumber')
-
     return this.tickets.length > 0 ? this.tickets[this.tickets.length - 1].number : 0;
   }
 
@@ -49,8 +44,6 @@ export class TicketService {
       handleAtDesk: undefined
     }
 
-    console.log('createTicket')
-
     this.tickets.push(ticket)
     // TODO: Communicate with WS
 
@@ -58,16 +51,17 @@ export class TicketService {
   }
 
   public drawTicket(desk: string) {
-    const ticket = this.tickets.find(ticket => !ticket.handleAtDesk)
+    const ticket = this.tickets.find(ticket => !ticket.handleAtDesk && !ticket.done)
+
+    console.log(ticket)
 
     if(!ticket) return {status: 'error', message: 'There are not pending tickets'}
 
     this.workingOnTickets.unshift({...ticket})
 
-    console.log('drawTicket')
-
     // TODO: Communicate with WS
     ticket.handleAtDesk = desk
+
     return {status: 'ok'}
   }
 
@@ -89,6 +83,8 @@ export class TicketService {
         // }
       }
     })
+
+    this.workingOnTickets = this.workingOnTickets.filter(ticket => ticket.id !== id)
 
     return {status: 'ok'}
   }
