@@ -13,8 +13,7 @@ function main() {
 
   //* Main server, just run create the instance of server
   const server = new Server({
-    port: PORT,
-    routes: AppRoutes.routes(),
+    port: PORT
   })
 
   // server.start()
@@ -22,6 +21,9 @@ function main() {
   //* Websocket server
   const httpServer = createServer(server.app)
   WSSService.initWSServer({ server: httpServer })
+
+  //* Add then the routes while the websocket instance start for can access to the instance from routes
+  server.addRoutes(AppRoutes.routes())
 
   httpServer.listen(envs.PORT, () => {
     console.log(`W says: Port running on port ${envs.PORT}`)
