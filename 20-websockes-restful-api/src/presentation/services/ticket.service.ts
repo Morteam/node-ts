@@ -3,6 +3,8 @@ import { Ticket } from '../../domain/interfaces/tickets';
 
 const { v4 } = UUIDAdapter
 
+// const v4 = () => 'sfdsf45'
+
 export class TicketService {
   private readonly tickets: Ticket[] = [
     { id: v4(), number: 1, createdAt: new Date(), done: false },
@@ -13,23 +15,41 @@ export class TicketService {
     { id: v4(), number: 6, createdAt: new Date(), done: false },
   ]
 
+  private readonly workingOnTickets: Ticket[] = []
+
+  public get allTickets():Ticket[] {
+    return this.tickets
+  }
+
   public get pendingTickets():Ticket[] {  
+    console.log('pendingTickets')
+
     return this.tickets.filter(ticket => !ticket.handleAtDesk)
   }
 
-  public lastTicketNumber() {
+  public get lastWorkingOnTickets():Ticket[] {
+    console.log('lastWorkingOnTickets')
+
+    return this.workingOnTickets.slice(0,4)
+  }
+
+  public get lastTicketNumber() {
+    console.log('lastTicketNumber')
+
     return this.tickets.length > 0 ? this.tickets[this.tickets.length - 1].number : 0;
   }
 
   public createTicket() {
     const ticket: Ticket = {
       id: v4(),
-      number: this.lastTicketNumber() + 1,
+      number: this.lastTicketNumber + 1,
       createdAt: new Date(),
       done: false,
       handelAt: undefined,
       handleAtDesk: undefined
     }
+
+    console.log('createTicket')
 
     this.tickets.push(ticket)
     // TODO: Communicate with WS
@@ -42,6 +62,10 @@ export class TicketService {
 
     if(!ticket) return {status: 'error', message: 'There are not pending tickets'}
 
+    this.workingOnTickets.unshift({...ticket})
+
+    console.log('drawTicket')
+
     // TODO: Communicate with WS
     ticket.handleAtDesk = desk
     return {status: 'ok'}
@@ -51,6 +75,8 @@ export class TicketService {
     const ticket = this.tickets.find(ticket => ticket.id === id)
 
     if(!ticket) return {status: 'error', message: 'Ticket not found'}
+
+    console.log('onFinishedTicket')
 
     this.tickets.map(ticketItem => {
       if(ticketItem.id === ticket.id) {

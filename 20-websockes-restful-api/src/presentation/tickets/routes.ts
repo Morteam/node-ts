@@ -1,10 +1,13 @@
 import { Router } from 'express'
 import { TicketController } from './controller'
+import { TicketService } from '../services/ticket.service'
 
 export class TicketRoutes {
   static get routes() {
     const router = Router()
-    const ticketController = new TicketController()
+    
+    const ticketService = new TicketService()
+    const ticketController = new TicketController(ticketService)
     
     router.get('/', ticketController.getTickets)
     router.get('/last', ticketController.getLastTicketNumber)
@@ -14,7 +17,7 @@ export class TicketRoutes {
     router.post('/', ticketController.createTicket)
     
     router.get('/draw/:desk', ticketController.drawTicket)
-    router.put('/done/:ticketID', ticketController.ticketFinish)
+    router.put('/done/:ticketId', ticketController.ticketFinish)
 
     return router
   }
