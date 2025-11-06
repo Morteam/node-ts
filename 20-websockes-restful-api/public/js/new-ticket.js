@@ -1,19 +1,42 @@
-const getLastTicketNumber = () => {
-  const REQUEST_PATH = 'http://localhost:3000/api/ticket/last'
+const getLastTicketNumber = async () => {
+  const REQUEST_PATH = '/api/ticket/last'
 
-  return fetch(REQUEST_PATH)
+  return await fetch(REQUEST_PATH)
     .then(response => response.json())
     .catch(console.error)
+}
+
+const getLastTicketNumberAndRender = async (element) => {
+  const lastTicketNumber = await getLastTicketNumber()
+
+  if(!isNaN(lastTicketNumber) && element) {
+    element.innerHTML = lastTicketNumber
+  }
+}
+
+const createNewTicket = () => {
+  const REQUEST_PATH = '/api/ticket'
+
+  return fetch(REQUEST_PATH, {
+    method: 'POST'
+  })
+    .then(response => response.json())
+    .catch(console.error)
+}
+
+const createNewTicketAndUpdate = async (element) => {
+  const { newTicket } = await createNewTicket()
+
+  element.innerHTML = newTicket?.number
 }
 
 (() => {
   document.addEventListener('DOMContentLoaded', async () => {
     const spanEl = document.querySelector('#lbl-new-ticket')
+    const buttonEl = document.querySelector('button')
 
-    const lastTicketNumber = await getLastTicketNumber()
+    getLastTicketNumberAndRender(spanEl)
 
-    if(!isNaN(lastTicketNumber) && spanEl) {
-      spanEl.innerHTML = lastTicketNumber
-    }
+    buttonEl.addEventListener('click', e => createNewTicketAndUpdate(spanEl))
   })
 })()
