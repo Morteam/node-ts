@@ -1,9 +1,8 @@
 import { UUIDAdapter } from '../../domain/adapters/uuid.adapter';
 import { Ticket } from '../../domain/interfaces/tickets';
+import { WSSService } from './wss.service';
 
 const { v4 } = UUIDAdapter
-
-// const v4 = () => 'sfdsf45'
 
 export class TicketService {
   private readonly tickets: Ticket[] = [
@@ -14,6 +13,12 @@ export class TicketService {
     { id: v4(), number: 5, createdAt: new Date(), done: false },
     { id: v4(), number: 6, createdAt: new Date(), done: false },
   ]
+
+  private readonly wssService: WSSService;
+
+  constructor(){
+    this.wssService = WSSService.instance
+  }
 
   private workingOnTickets: Ticket[] = []
 
@@ -45,7 +50,7 @@ export class TicketService {
     }
 
     this.tickets.push(ticket)
-    // TODO: Communicate with WS
+    this.onTicketNumberChanged()
 
     return ticket
   }
@@ -63,6 +68,12 @@ export class TicketService {
     ticket.handleAtDesk = desk
 
     return {status: 'ok'}
+  }
+
+  private onTicketNumberChanged() {
+    this.wssService.sendMessage('on-ticket-count-changed', {
+      pending: this.pendingTickets.length
+    })
   }
 
   public onFinishedTicket(id: string) {

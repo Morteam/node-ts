@@ -1,7 +1,7 @@
-const getLastTicketNumber = async () => {
+const getLastTicketNumber = () => {
   const REQUEST_PATH = '/api/ticket/last'
 
-  return await fetch(REQUEST_PATH)
+  return fetch(REQUEST_PATH)
     .then(response => response.json())
     .catch(console.error)
 }
