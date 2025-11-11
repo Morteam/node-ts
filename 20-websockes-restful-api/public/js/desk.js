@@ -90,12 +90,28 @@ const getTicket = async (uiElements) => {
   currentTicketLabel.innerText = ticket.number
 }
 
+const finishTicket = async (uiElements) => {
+  const { currentTicketLabel } = uiElements;
+
+  if(!workingTicket) return
+
+  const { status, message } = await fetch(`/api/ticket/done/${workingTicket.id}`, {
+    method: 'PUT'
+  })
+    .then(response => response.json())
+
+  if(status === 'ok') {
+    workingTicket = null;
+    currentTicketLabel.innerText = 'Nobody'
+  }
+}
+
 const startDOM = async () => {
   const labelPendingEl = document.querySelector('#lbl-pending')
   const titleEl = document.querySelector('h1')
   const noMoreAlert = document.querySelector('.alert')
   const btnDraw = document.querySelector('#btn-draw')
-  const btnFinish = document.querySelector('#btn-finish')
+  const btnFinish = document.querySelector('#btn-done')
   const currentTicketLabel = document.querySelector('h4 small')
 
   const uiElements = {
@@ -114,6 +130,7 @@ const startDOM = async () => {
   connectToWebSockets({uiElements});
 
   btnDraw.addEventListener('click', () => getTicket(uiElements))
+  btnFinish.addEventListener('click', () => finishTicket(uiElements))
 }
 
 (() => document.addEventListener('DOMContentLoaded', startDOM))()
