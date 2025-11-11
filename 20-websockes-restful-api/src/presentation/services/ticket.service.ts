@@ -58,16 +58,15 @@ export class TicketService {
   public drawTicket(desk: string) {
     const ticket = this.tickets.find(ticket => !ticket.handleAtDesk && !ticket.done)
 
-    console.log(ticket)
-
     if(!ticket) return {status: 'error', message: 'There are not pending tickets'}
 
     this.workingOnTickets.unshift({...ticket})
 
-    // TODO: Communicate with WS
     ticket.handleAtDesk = desk
 
-    return {status: 'ok'}
+    this.onTicketNumberChanged()
+
+    return {status: 'ok', ticket}
   }
 
   private onTicketNumberChanged() {

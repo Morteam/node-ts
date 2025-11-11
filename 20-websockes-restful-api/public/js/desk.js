@@ -1,3 +1,5 @@
+let workingTicket = null
+
 const loadInitialCount = () => {
   const REQUEST_PATH = '/api/ticket/pending'
 
@@ -6,7 +8,7 @@ const loadInitialCount = () => {
     .catch(console.error)
 }
 
-const checkCountPendings = (uiElements, count) => {
+const checkCountPendings = (uiElements, count = 0) => {
   const { labelPendingEl, noMoreAlert } = uiElements
 
   const HIDE_CSS_CLASS = 'd-none'
@@ -20,7 +22,7 @@ const checkCountPendings = (uiElements, count) => {
     labelPendingEl.innerHTML = count
   }
 
-  console.log('AAAAhhh 4')
+  console.log('CAA' , count)
 }
 
 const loadInitialCountAndRender = async (uiElements) => {
@@ -31,7 +33,6 @@ const loadInitialCountAndRender = async (uiElements) => {
 
 function connectToWebSockets(socketProps) {
   const { uiElements } = socketProps
-  const { labelPendingEl } = uiElements
 
   const socket = new WebSocket( 'ws://localhost:3000/ws' );
 
@@ -39,6 +40,7 @@ function connectToWebSockets(socketProps) {
     const { type, payload } = JSON.parse(event.data)
 
     if(type === 'on-ticket-count-changed') {
+      console.log('BAA' , payload.pending)
       checkCountPendings(uiElements, payload?.pending)
     }
   };
@@ -61,29 +63,57 @@ const updateTitleText = (titleEl, title) => {
   titleEl.innerText = title
 }
 
-const startDOM = async () => {
-  const labelPendingEl = document.querySelector('#lbl-pending')
-  const titleEl = document.querySelector('h1')
-  const noMoreAlert = document.querySelector('.alert')
-
-  const uiElements = {
-    labelPendingEl,
-    titleEl,
-    noMoreAlert
-  }
-
+const getDeskNumber = () => {
   const searchParams = new URLSearchParams(window.location.search)
-  
+
   if(!searchParams.has('desk')) {
     window.location = 'index.html'
     throw new Error('Desk is required')
   }
 
-  const deskNumber = searchParams.get('desk')
+  return searchParams.get('desk')
+}
+
+const getTicket = async (uiElements) => {
+  const { currentTicketLabel } = uiElements;
+
+  const deskNumber = getDeskNumber()
+
+  const { status, ticket, message } = await fetch(`/api/ticket/draw/${deskNumber}`)
+    .then(response => response.json())
+
+  if(status === 'error') {
+    currentTicketLabel.innerText = message
+  }
+
+  workingTicket = ticket
+  currentTicketLabel.innerText = ticket.number
+}
+
+const startDOM = async () => {
+  const labelPendingEl = document.querySelector('#lbl-pending')
+  const titleEl = document.querySelector('h1')
+  const noMoreAlert = document.querySelector('.alert')
+  const btnDraw = document.querySelector('#btn-draw')
+  const btnFinish = document.querySelector('#btn-finish')
+  const currentTicketLabel = document.querySelector('h4 small')
+
+  const uiElements = {
+    labelPendingEl,
+    titleEl,
+    noMoreAlert,
+    btnDraw,
+    btnFinish,
+    currentTicketLabel
+  }
+
+  const deskNumber = getDeskNumber()
   updateTitleText(titleEl, deskNumber)
 
   loadInitialCountAndRender(uiElements)
   connectToWebSockets({uiElements});
+
+  btnDraw.addEventListener('click', () => getTicket(uiElements))
 }
 
 (() => document.addEventListener('DOMContentLoaded', startDOM))()
