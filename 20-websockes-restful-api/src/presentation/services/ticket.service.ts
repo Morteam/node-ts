@@ -64,7 +64,7 @@ export class TicketService {
     this.workingOnTickets.unshift({...ticket})
 
     this.onTicketNumberChanged()
-    this.onTicketNumberDrew()
+    this.onWorkingChanged()
 
     return {status: 'ok', ticket}
   }
@@ -76,9 +76,9 @@ export class TicketService {
     })
   }
 
-  private onTicketNumberDrew() {
-    this.wssService.sendMessage('on-ticket-count-drew', {
-      drew: this.workingOnTickets[this.workingOnTickets.length - 1]
+  private onWorkingChanged() {
+    this.wssService.sendMessage('on-working-changed', {
+      drew: this.lastWorkingOnTickets
     })
   }
 

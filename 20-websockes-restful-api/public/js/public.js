@@ -10,17 +10,10 @@ const printWorkingOn = async (uiElements) => {
 
   const workingOnItems = await getWorkingOn()
 
-  console.log(ticketLabels)
-  console.log(deskLabels)
-  console.log(workingOnItems)
-
   workingOnItems.forEach((item, index) => {
     ticketLabels[index].innerText = item.number
     deskLabels[index].innerText = item.handleAtDesk
   });
-
-  console.log(workingOnItems)
-  console.log(workingOnItems.length)
 }
 
 function connectToWebSockets(socketProps) {
@@ -31,7 +24,7 @@ function connectToWebSockets(socketProps) {
   socket.onmessage = ( event ) => {
     const { type, payload } = JSON.parse(event.data)
 
-    if(type === 'on-ticket-count-drew') {
+    if(type === 'on-working-changed') {
       printWorkingOn(uiElements)
     }
   };
