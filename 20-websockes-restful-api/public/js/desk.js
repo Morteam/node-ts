@@ -75,6 +75,8 @@ const getDeskNumber = () => {
 }
 
 const getTicket = async (uiElements) => {
+  await finishTicket(uiElements)
+
   const { currentTicketLabel } = uiElements;
 
   const deskNumber = getDeskNumber()

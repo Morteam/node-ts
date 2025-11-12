@@ -5,7 +5,7 @@ import { WSSService } from './wss.service';
 const { v4 } = UUIDAdapter
 
 export class TicketService {
-  private readonly tickets: Ticket[] = [
+  private tickets: Ticket[] = [
     { id: v4(), number: 1, createdAt: new Date(), done: false },
     { id: v4(), number: 2, createdAt: new Date(), done: false },
     { id: v4(), number: 3, createdAt: new Date(), done: false },
@@ -31,7 +31,6 @@ export class TicketService {
   }
 
   public get lastWorkingOnTickets():Ticket[] {
-    console.log(this.workingOnTickets)
     return this.workingOnTickets.slice(0,4)
   }
 
@@ -60,18 +59,26 @@ export class TicketService {
 
     if(!ticket) return {status: 'error', message: 'There are not pending tickets'}
 
-    this.workingOnTickets.unshift({...ticket})
-
     ticket.handleAtDesk = desk
 
+    this.workingOnTickets.unshift({...ticket})
+
     this.onTicketNumberChanged()
+    this.onTicketNumberDrew()
 
     return {status: 'ok', ticket}
   }
 
+  //? Ws Events in other File??
   private onTicketNumberChanged() {
     this.wssService.sendMessage('on-ticket-count-changed', {
       pending: this.pendingTickets.length
+    })
+  }
+
+  private onTicketNumberDrew() {
+    this.wssService.sendMessage('on-ticket-count-drew', {
+      drew: this.workingOnTickets[this.workingOnTickets.length - 1]
     })
   }
 
@@ -80,9 +87,9 @@ export class TicketService {
 
     if(!ticket) return {status: 'error', message: 'Ticket not found'}
 
-    console.log('onFinishedTicket')
+    //? WS
 
-    this.tickets.map(ticketItem => {
+    this.tickets = this.tickets.map(ticketItem => {
       if(ticketItem.id === ticket.id) {
         ticketItem.done = true
 
@@ -92,6 +99,8 @@ export class TicketService {
         //   done: true
         // }
       }
+
+      return ticketItem;
     })
 
     this.workingOnTickets = this.workingOnTickets.filter(ticket => ticket.id !== id)
